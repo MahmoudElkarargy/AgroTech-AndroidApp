@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logoWidth">165dp</dimen>
+    <dimen name="logoHeight">69dp</dimen>
+    <dimen name="logoMarginStart">16dp</dimen>
+    <dimen name="logoMarginLeft">16dp</dimen>
+    <dimen name="logoMarginTop">16dp</dimen>
+    <dimen name="logoMarginBottom">414dp</dimen>
+    <dimen name="agriculturefieldWidth">481dp</dimen>
+    <dimen name="agriculturefieldHeight">976dp</dimen>
+    <dimen name="agriculturefieldMarginStart">230dp</dimen>
+    <dimen name="agriculturefieldMarginLeft">230dp</dimen>
+    <dimen name="logoMarginEnd">7dp</dimen>
+</resources>
