@@ -69,6 +69,7 @@
     <dimen name="forgotPassMarginLeft">5sp</dimen>
     <dimen name="forgotPassMarginTop">5sp</dimen>
     <dimen name="forgotPassSize">12sp</dimen>
+    <dimen name="editTextPaddingLeft">10sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

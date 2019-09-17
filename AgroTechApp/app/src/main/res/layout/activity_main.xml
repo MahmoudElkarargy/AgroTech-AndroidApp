@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="133dp"
@@ -63,8 +64,25 @@
         android:layout_marginTop="20dp"
         android:text="Sign In"
         android:textSize="@dimen/signInButtonMarginSize"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+
+    <TextView
+        android:id="@+id/dontHaveAccText"
+        android:layout_width="@dimen/textWidth"
+        android:layout_height="@dimen/textHeight"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="@dimen/textMarginTop"
+        android:layout_marginBottom="@dimen/textMarginBottom"
+        android:text="Don't have an accound?"
+        android:textSize="@dimen/textSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn"
+        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/signUpTextView"
@@ -75,25 +93,11 @@
         android:text="Sign Up"
         android:textSize="@dimen/signUpSize"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dontHaveAccText"
         app:layout_constraintTop_toBottomOf="@+id/signInBtn"
-        app:layout_constraintVertical_bias="0.027" />
-
-    <TextView
-        android:id="@+id/dontHaveAccText"
-        android:layout_width="@dimen/textWidth"
-        android:layout_height="@dimen/textHeight"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="@dimen/textMarginTop"
-        android:layout_marginBottom="@dimen/textMarginBottom"
-        android:text="Don't have an accound?"
-        android:textSize="@dimen/textSize"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInBtn"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="0.019" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -104,7 +108,9 @@
         android:ems="10"
         android:inputType="textPassword"
         android:text="passssssss"
-        android:textSize="@dimen/passEditSize"
+        android:paddingLeft="@dimen/editTextPaddingLeft"
+        android:background="@color/colorGrey"
+        android:textColor="@color/colorPrimaryDark"        android:textSize="@dimen/passEditSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextView" />
 
@@ -127,7 +133,7 @@
         android:layout_marginTop="16dp"
         android:text="Forgot password?"
         android:textSize="@dimen/forgotPassSize"
-        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/passwordTextView"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
@@ -137,11 +143,13 @@
         android:layout_height="@dimen/emailEditHeight"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
+        android:paddingLeft="@dimen/editTextPaddingLeft"
         android:ems="10"
         android:inputType="textEmailAddress"
-
         android:text="your_email@test.com"
         android:textSize="@dimen/emailEditSize"
+        android:background="@color/colorGrey"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailAddressTextView" />
 
