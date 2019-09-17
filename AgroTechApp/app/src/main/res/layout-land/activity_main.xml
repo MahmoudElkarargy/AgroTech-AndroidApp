@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/logoWidth"
-        android:layout_height="@dimen/logoHeight"
-        android:layout_marginStart="@dimen/logoMarginStart"
-        android:layout_marginLeft="@dimen/logoMarginLeft"
+        android:layout_width="328dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="96dp"
         android:layout_marginTop="@dimen/logoMarginTop"
         android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,13 +22,149 @@
         android:id="@+id/imageView2"
         android:layout_width="@dimen/agriculturefieldWidth"
         android:layout_height="@dimen/agriculturefieldHeight"
-        android:layout_marginStart="@dimen/agriculturefieldMarginStart"
-        android:layout_marginLeft="@dimen/agriculturefieldMarginLeft"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/PasswordeditText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.506"
         app:srcCompat="@drawable/agriculture_field_background" />
+
+    <TextView
+        android:id="@+id/SignInText"
+        android:layout_width="285dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:text="Sign in to AgroTech"
+        android:textSize="@dimen/signInTextSize"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/credentialsTextView"
+        android:layout_width="267dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:text="Please enter your credentials to proceed"
+        android:textSize="@dimen/credentialsTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SignInText" />
+
+    <EditText
+        android:id="@+id/PasswordeditText"
+        android:layout_width="@dimen/passEditWidth"
+        android:layout_height="@dimen/passEditHeight"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="passssssss"
+        android:textSize="@dimen/passEditSize"
+        app:layout_constraintStart_toEndOf="@+id/EmaileditText"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextView" />
+
+    <EditText
+        android:id="@+id/EmaileditText"
+        android:layout_width="@dimen/emailEditWidth"
+        android:layout_height="@dimen/emailEditHeight"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:text="your_email@test.com"
+        android:textSize="@dimen/emailEditSize"
+        app:layout_constraintEnd_toStartOf="@+id/PasswordeditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddressTextView" />
+
+    <TextView
+        android:id="@+id/emailAddressTextView"
+        android:layout_width="@dimen/emailTextWidth"
+        android:layout_height="0dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:text="EMAIL ADDRESS"
+        android:textSize="@dimen/emailTextSize"
+        app:layout_constraintEnd_toStartOf="@+id/passwordTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credentialsTextView" />
+
+    <TextView
+        android:id="@+id/passwordTextView"
+        android:layout_width="@dimen/passTextWidth"
+        android:layout_height="@dimen/passTextHeight"
+        android:layout_marginStart="77dp"
+        android:layout_marginLeft="77dp"
+        android:layout_marginTop="9dp"
+        android:text="PASSWORD"
+        android:textSize="@dimen/passTextSize"
+        app:layout_constraintStart_toEndOf="@+id/emailAddressTextView"
+        app:layout_constraintTop_toBottomOf="@+id/credentialsTextView" />
+
+    <TextView
+        android:id="@+id/forgotPassText"
+        android:layout_width="@dimen/forgotPassWidth"
+        android:layout_height="@dimen/forgotPassHeight"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="1dp"
+        android:text="Forgot password?"
+        android:textSize="@dimen/forgotPassSize"
+        app:layout_constraintBottom_toTopOf="@+id/PasswordeditText"
+        app:layout_constraintStart_toEndOf="@+id/passwordTextView" />
+
+    <Button
+        android:id="@+id/SignInButton"
+        android:layout_width="316dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginRight="86dp"
+        android:text="Sign In"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordeditText" />
+
+    <TextView
+        android:id="@+id/dontHaveAccText"
+        android:layout_width="171dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="13dp"
+        android:text="Don't have an accound?"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SignInButton" />
+
+    <TextView
+        android:id="@+id/signUpText"
+        android:layout_width="@dimen/signUpWidth"
+        android:layout_height="@dimen/signUpHeight"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Sign Up"
+        android:textSize="@dimen/signUpSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dontHaveAccText"
+        app:layout_constraintTop_toBottomOf="@+id/SignInButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
