@@ -25,7 +25,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/PasswordeditText"
+        app:layout_constraintStart_toEndOf="@+id/passwordEditText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.506"
         app:srcCompat="@drawable/agriculture_field_background" />
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/SignInText" />
 
     <EditText
-        android:id="@+id/PasswordeditText"
+        android:id="@+id/passwordEditText"
         android:layout_width="@dimen/passEditWidth"
         android:layout_height="@dimen/passEditHeight"
         android:layout_marginStart="19dp"
@@ -64,11 +64,11 @@
         android:inputType="textPassword"
         android:text="passssssss"
         android:textSize="@dimen/passEditSize"
-        app:layout_constraintStart_toEndOf="@+id/EmaileditText"
+        app:layout_constraintStart_toEndOf="@+id/emailEditText"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextView" />
 
     <EditText
-        android:id="@+id/EmaileditText"
+        android:id="@+id/emailEditText"
         android:layout_width="@dimen/emailEditWidth"
         android:layout_height="@dimen/emailEditHeight"
         android:layout_marginStart="80dp"
@@ -80,7 +80,7 @@
         android:inputType="textEmailAddress"
         android:text="your_email@test.com"
         android:textSize="@dimen/emailEditSize"
-        app:layout_constraintEnd_toStartOf="@+id/PasswordeditText"
+        app:layout_constraintEnd_toStartOf="@+id/passwordEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailAddressTextView" />
 
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/credentialsTextView" />
 
     <TextView
-        android:id="@+id/forgotPassText"
+        android:id="@+id/forgotPassTextView"
         android:layout_width="@dimen/forgotPassWidth"
         android:layout_height="@dimen/forgotPassHeight"
         android:layout_marginStart="2dp"
@@ -120,11 +120,11 @@
         android:layout_marginBottom="1dp"
         android:text="Forgot password?"
         android:textSize="@dimen/forgotPassSize"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordeditText"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
         app:layout_constraintStart_toEndOf="@+id/passwordTextView" />
 
     <Button
-        android:id="@+id/SignInButton"
+        android:id="@+id/signInBtn"
         android:layout_width="316dp"
         android:layout_height="43dp"
         android:layout_marginStart="120dp"
@@ -136,7 +136,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordeditText" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
     <TextView
         android:id="@+id/dontHaveAccText"
@@ -150,10 +150,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignInButton" />
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 
     <TextView
-        android:id="@+id/signUpText"
+        android:id="@+id/signUpTextView"
         android:layout_width="@dimen/signUpWidth"
         android:layout_height="@dimen/signUpHeight"
         android:layout_marginStart="9dp"
@@ -165,6 +165,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dontHaveAccText"
-        app:layout_constraintTop_toBottomOf="@+id/SignInButton" />
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
