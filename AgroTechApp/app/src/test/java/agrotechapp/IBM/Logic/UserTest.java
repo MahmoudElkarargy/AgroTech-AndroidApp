@@ -18,7 +18,6 @@ public class UserTest {
 				System.out.println(entry.getDeviceID() + " " + entry.getTime() + " " + entry.getTemperature());
 			}
 		}
-
 		//Test Robot command
         RobotCommand.sendCommand("manual","F","200");
     }

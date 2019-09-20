@@ -1,14 +1,14 @@
-package agrotechapp.IBM.ui.gallery;
+package agrotechapp.IBM.ui.Robot;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class RobotViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public RobotViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }

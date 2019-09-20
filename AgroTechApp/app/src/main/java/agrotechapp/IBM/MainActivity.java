@@ -1,6 +1,8 @@
 package agrotechapp.IBM;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+import agrotechapp.IBM.Logic.*;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import org.json.JSONException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     //variables
     String email;
     String password;
+    private boolean authenticated = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 email = emailEditText.getText().toString();
                 password = passwordEditText.getText().toString();
                 //code to authenticate login
-                Intent goToDashboard = new Intent(getApplicationContext(), Dashboard.class);
-                startActivity(goToDashboard);
+//                try {
+//                    authenticated = User.Server.authenticateUser(email, password);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+                if(authenticated){
+                    User user = User.getInstance();
+                    Intent goToDashboard = new Intent(getApplicationContext(), Dashboard.class);
+                    startActivity(goToDashboard);
+                }
             }
         });
 

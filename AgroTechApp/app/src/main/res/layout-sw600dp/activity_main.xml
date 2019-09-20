@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logoImageView"
         android:layout_width="@dimen/logoWidth"
         android:layout_height="@dimen/logoHeight"
         android:layout_marginStart="36dp"
@@ -27,7 +27,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginLeft="108dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/logoImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.505"
         app:srcCompat="@drawable/agriculture_field_background" />
@@ -43,7 +43,7 @@
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView" />
 
     <TextView
         android:id="@+id/credentialsTextView"
