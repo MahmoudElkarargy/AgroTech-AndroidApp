@@ -140,18 +140,4 @@ public class User {
 					sensorsData);
 		}
 	}
-	
-	
-	// Test
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-	public static void main(String[] args) throws JSONException {
-		Server.authenticateUser("rowan.hisham133@gmail.com", "1234");
-		User user = User.getInstance();
-		System.out.println(user.getFirstName() + " " + user.getLastName());
-		for(ArrayList<SensorData> s : user.sensorsData) {
-			for(SensorData entry : s) {
-				System.out.println(entry.getDeviceID() + " " + entry.getTime() + " " + entry.getTemperature());
-			}
-		}
-	}
 }
