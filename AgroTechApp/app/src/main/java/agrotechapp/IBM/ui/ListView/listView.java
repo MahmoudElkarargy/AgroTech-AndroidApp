@@ -1,15 +1,19 @@
 package agrotechapp.IBM.ui.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.view.Window;
+
 
 import agrotechapp.IBM.Dashboard;
 import agrotechapp.IBM.R;
@@ -24,6 +28,8 @@ public class listView extends AppCompatActivity {
     String[] dates;
     ImageView backImageView;
     TextView backTextView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,7 @@ public class listView extends AppCompatActivity {
 
         ItemAdapter itemAdapter = new ItemAdapter(this,IDs,temps,pHs,soil,dates);
         myListView.setAdapter(itemAdapter);
+
 
 
         backImageView = findViewById(R.id.backImageView);

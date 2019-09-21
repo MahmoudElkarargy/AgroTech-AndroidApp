@@ -14,7 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graphImageView">
@@ -29,11 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID"
-            android:textColor="@color/colorRed"
-            android:textSize="18sp" />
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="13sp" />
 
         <Space
-            android:layout_width="55dp"
+            android:layout_width="63dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -41,9 +41,9 @@
             android:id="@+id/pHList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pH"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
+            android:text="PH"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="13sp" />
 
         <Space
             android:layout_width="40dp"
@@ -54,12 +54,12 @@
             android:id="@+id/tempList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Temp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
+            android:text="TEMP"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="13sp"/>
 
         <Space
-            android:layout_width="35dp"
+            android:layout_width="45sp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -67,12 +67,12 @@
             android:id="@+id/soilList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Soil"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
+            android:text="SOIL"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="13sp" />
 
         <Space
-            android:layout_width="40dp"
+            android:layout_width="50sp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -80,9 +80,9 @@
             android:id="@+id/dateList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:textColor="@color/colorRed"
-            android:textSize="18sp" />
+            android:text="DATE"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="13sp" />
 
         <Space
             android:layout_width="40dp"
@@ -126,7 +126,7 @@
         android:paddingStart="-20sp"
         android:paddingTop="10sp"
         android:divider="@color/colorLightGreen"
-        android:dividerHeight="25sp"
+        android:dividerHeight="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graphImageView">
 

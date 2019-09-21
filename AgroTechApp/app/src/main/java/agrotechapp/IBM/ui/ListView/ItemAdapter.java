@@ -65,7 +65,7 @@ public class ItemAdapter extends BaseAdapter {
         pHTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
         tempTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
         soilTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
-        dateTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+        dateTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
 
 
         String id = IDs[i];
