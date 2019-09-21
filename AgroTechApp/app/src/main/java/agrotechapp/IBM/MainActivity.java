@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Button signInBtn;
     TextView signUpTextView;
     TextView forgotPassTextView;
+    TextView userValidationTextView;
     EditText emailEditText;
     EditText passwordEditText;
     //variables
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         forgotPassTextView = (TextView) findViewById(R.id.forgotPassTextView);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        userValidationTextView = (TextView) findViewById(R.id.userValidationTextView);
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -86,12 +88,14 @@ public class MainActivity extends AppCompatActivity {
             return "False";
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             if(result.equals("True")) {
                 Intent goToDashboard = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(goToDashboard);
+                userValidationTextView.setText("");
+            }else{
+                userValidationTextView.setText("Invalid Username or Password");
             }
         }
     }
