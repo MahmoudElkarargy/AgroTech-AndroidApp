@@ -7,6 +7,7 @@ import agrotechapp.IBM.Logic.*;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -78,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         protected String doInBackground(String... strings) {
-
+            signInBtn.setBackgroundColor(res.getColor(R.color.colorDarkGrey));
             try {
                 return  User.Server.authenticateUser(strings[0],strings[1]);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             return "False";
         }
 
         @Override
         protected void onPostExecute(String result) {
+            signInBtn.setBackgroundColor(res.getColor(R.color.colorPrimary));
             if(result.equals("True")) {
                 Intent goToDashboard = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(goToDashboard);

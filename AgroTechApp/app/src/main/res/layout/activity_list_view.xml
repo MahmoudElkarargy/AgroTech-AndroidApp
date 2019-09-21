@@ -8,6 +8,7 @@
     tools:context=".ui.ListView.listView">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="421dp"
         android:layout_height="36dp"
         android:layout_alignParentStart="true"
@@ -19,7 +20,7 @@
         app:layout_constraintTop_toBottomOf="@+id/graphImageView">
 
         <Space
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -28,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorRed"
+            android:textSize="18sp" />
 
         <Space
             android:layout_width="55dp"
@@ -41,11 +42,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="pH"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
 
         <Space
-            android:layout_width="35dp"
+            android:layout_width="40dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -54,11 +55,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Temp"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
 
         <Space
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -67,11 +68,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Soil"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
 
         <Space
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -80,8 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorRed"
+            android:textSize="18sp" />
 
         <Space
             android:layout_width="40dp"
@@ -91,49 +92,45 @@
 
     <ImageView
         android:id="@+id/fieldImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="368dp"
+        android:layout_height="67dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/graphImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.046"
         app:srcCompat="@drawable/field_name_background" />
 
     <ImageView
         android:id="@+id/graphImageView"
-        android:layout_width="420dp"
-        android:layout_height="252dp"
-        android:layout_marginTop="152dp"
+        android:layout_width="377dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="104dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/chart_background" />
 
     <ListView
         android:id="@+id/myList"
-        android:layout_width="410dp"
-        android:layout_height="424dp"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/colorWhite"
+        android:paddingLeft="-20sp"
+        android:paddingStart="-20sp"
+        android:paddingTop="10sp"
+        android:divider="@color/colorLightGreen"
+        android:dividerHeight="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graphImageView">
 
     </ListView>
-
-    <ImageView
-        android:id="@+id/backImageView"
-        android:layout_width="15dp"
-        android:layout_height="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/fieldImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363"
-        app:srcCompat="@drawable/icon_back" />
 
     <TextView
         android:id="@+id/backTextView"
@@ -143,9 +140,49 @@
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/fieldImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/backImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/backImageView"
+        android:layout_width="15dp"
+        android:layout_height="17dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/fieldImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/icon_back" />
+
+    <TextView
+        android:id="@+id/fieldNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FIELD NUMBER"
+        android:textColor="@color/colorRed"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/graphImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.823" />
+
+    <TextView
+        android:id="@+id/cropTypeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crop type"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

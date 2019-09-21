@@ -1,6 +1,7 @@
 package agrotechapp.IBM.ui.ListView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,20 @@ public class ItemAdapter extends BaseAdapter {
         TextView tempTextView = (TextView) v.findViewById(R.id.tempList);
         TextView soilTextView = (TextView) v.findViewById(R.id.soilList);
         TextView dateTextView = (TextView) v.findViewById(R.id.dateList);
+
+        idTextView.setTextSize(16);
+        pHTextView.setTextSize(16);
+        tempTextView.setTextSize(16);
+        soilTextView.setTextSize(16);
+        dateTextView.setTextSize(16);
+        dateTextView.setTextSize(16);
+
+        idTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+        pHTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+        tempTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+        soilTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+        dateTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+
 
         String id = IDs[i];
         String temp = temps[i];
