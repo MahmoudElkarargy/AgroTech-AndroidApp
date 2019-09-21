@@ -10,7 +10,7 @@ public class UserTest {
     @Test
     public void main() throws JSONException {
         //Test Log-In Authentication and data loading
-        User.Server.authenticateUser("rowan.hisham133@gmail.com", "1234");
+//        User.Server.authenticateUser("rowan.hisham133@gmail.com", "1234");
 //		User user = User.getInstance();
 //		System.out.println(user.getFirstName() + " " + user.getLastName());
 //		for(ArrayList<SensorData> s : user.getSensorsData()) {
@@ -19,6 +19,6 @@ public class UserTest {
 //			}
 //		}
 //		//Test Robot command
-//        RobotCommand.sendCommand("manual","F","200");
+        RobotCommand.sendCommand("manual","F","200");
     }
 }

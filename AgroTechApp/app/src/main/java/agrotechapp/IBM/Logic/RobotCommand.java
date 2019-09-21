@@ -11,41 +11,46 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class RobotCommand {
 
     private static String urlComm = "https://nodered-ibmdigitalnationcompetition.eu-gb.mybluemix.net/robotCommands";
 
 
-    public static Boolean sendCommand(String mode, String dir, String speed) throws JSONException {
+    public static String sendCommand(String mode, String dir, String speed) throws JSONException {
         // Set up JSON Object to send as parameter
         JSONObject data = new JSONObject();
         data.put("mode", mode);
         data.put("dir", dir);
         data.put("speed", speed);
 
+
         //Set up Post Request
-        try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
-            HttpPost request = new HttpPost(urlComm);
-            StringEntity params = new StringEntity(data.toString());
-            request.addHeader("content-type", "application/json");
-            request.setEntity(params);
-            HttpResponse result = httpClient.execute(request);
-            String resultString = EntityUtils.toString(result.getEntity(), "UTF-8");
+        OkHttpClient client = new OkHttpClient();
+        MediaType JSON
+                = MediaType.parse("application/json; charset=utf-8");
 
+        RequestBody body = RequestBody.create(JSON,data.toString());
+        Request request = new Request.Builder()
+                .url(urlComm)
+                .post(body)
+                .build();
 
-            if(result.getStatusLine().getStatusCode() == 200){
-                System.out.println(resultString + " SENT CORRECTLY");
-                return true;
-            }else{
-                return false;
+        try {
+            Response response = client.newCall(request).execute();
+            if(!response.isSuccessful()){
+                return "False";
             }
-
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        return true;
+        return "True";
     }
 
 }
