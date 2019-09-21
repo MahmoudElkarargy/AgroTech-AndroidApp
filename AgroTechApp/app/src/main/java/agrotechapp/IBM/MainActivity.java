@@ -1,18 +1,22 @@
 package agrotechapp.IBM;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import agrotechapp.IBM.Logic.*;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+
 import org.json.JSONException;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,21 +45,13 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 email = emailEditText.getText().toString();
                 password = passwordEditText.getText().toString();
                 //code to authenticate login
-//                try {
-//                    authenticated = User.Server.authenticateUser(email, password);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-                if(authenticated){
-                    User user = User.getInstance();
-                    Intent goToDashboard = new Intent(getApplicationContext(), Dashboard.class);
-                    startActivity(goToDashboard);
-                }
+                new AuthenticateLogIn().execute(email,password);
             }
         });
 
@@ -73,5 +69,30 @@ public class MainActivity extends AppCompatActivity {
                 //code to reset password
             }
         });
+    }
+
+    private class AuthenticateLogIn extends AsyncTask<String, Void, String> {
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                return  User.Server.authenticateUser(strings[0],strings[1]);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return "False";
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            if(result.equals("True")) {
+                Intent goToDashboard = new Intent(getApplicationContext(), Dashboard.class);
+                startActivity(goToDashboard);
+            }
+        }
     }
 }

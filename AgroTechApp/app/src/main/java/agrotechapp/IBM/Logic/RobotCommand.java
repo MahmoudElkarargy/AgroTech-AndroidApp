@@ -35,6 +35,9 @@ public class RobotCommand {
 
             if(result.getStatusLine().getStatusCode() == 200){
                 System.out.println(resultString + " SENT CORRECTLY");
+                return true;
+            }else{
+                return false;
             }
 
         } catch (IOException e) {

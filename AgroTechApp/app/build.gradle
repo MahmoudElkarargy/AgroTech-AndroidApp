@@ -57,4 +57,7 @@ dependencies {
     implementation files('libs/commons-lang3-3.9-sources.jar')
     implementation files('libs/commons-lang3-3.9-test-sources.jar')
     implementation files('libs/commons-lang3-3.9-tests.jar')
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+
+
 }
