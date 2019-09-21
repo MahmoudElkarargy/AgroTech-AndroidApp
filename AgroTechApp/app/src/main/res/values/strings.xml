@@ -11,4 +11,12 @@
     <string name="menu_home">Home</string>
     <string name="menu_robot">Robot</string>
     <string name="menu_tools">Tools</string>
+
+    <string-array name="IDs">
+        <item>"#2177"</item>
+        <item>"#2178"</item>
+        <item>"#2179"</item>
+        <item>"#2180"</item>
+    </string-array>
+
 </resources>
