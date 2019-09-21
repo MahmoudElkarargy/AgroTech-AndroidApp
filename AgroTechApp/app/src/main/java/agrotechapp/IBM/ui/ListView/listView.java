@@ -18,6 +18,10 @@ public class listView extends AppCompatActivity {
 
     ListView myListView;
     String[] IDs;
+    String[] temps;
+    String[] pHs;
+    String[] soil;
+    String[] dates;
     ImageView backImageView;
     TextView backTextView;
 
@@ -29,7 +33,14 @@ public class listView extends AppCompatActivity {
         Resources res = getResources();
         myListView = (ListView) findViewById(R.id.myList);
         IDs = res.getStringArray(R.array.IDs);
-        myListView.setAdapter(new ArrayAdapter<String>(this,R.layout.my_list_detail,IDs));
+        temps = res.getStringArray(R.array.temps);
+        pHs = res.getStringArray(R.array.pH);
+        soil = res.getStringArray(R.array.soil);
+        dates = res.getStringArray(R.array.date);
+
+        ItemAdapter itemAdapter = new ItemAdapter(this,IDs,temps,pHs,soil,dates);
+        myListView.setAdapter(itemAdapter);
+
 
         backImageView = findViewById(R.id.backImageView);
         backTextView = findViewById(R.id.backTextView);

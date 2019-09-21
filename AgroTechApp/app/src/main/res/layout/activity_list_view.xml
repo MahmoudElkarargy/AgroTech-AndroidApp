@@ -7,6 +7,88 @@
     android:background="@color/colorLightGreen"
     tools:context=".ui.ListView.listView">
 
+    <LinearLayout
+        android:layout_width="421dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graphImageView">
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="22dp"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/IDsList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="55dp"
+            android:layout_height="22dp"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/pHList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pH"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="35dp"
+            android:layout_height="22dp"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/tempList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="40dp"
+            android:layout_height="22dp"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/soilList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soil"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="22dp"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/dateList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="40dp"
+            android:layout_height="22dp"
+            android:layout_weight="0" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/fieldImageView"
         android:layout_width="wrap_content"
@@ -35,9 +117,11 @@
         android:id="@+id/myList"
         android:layout_width="410dp"
         android:layout_height="424dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/graphImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/graphImageView">
+
+    </ListView>
 
     <ImageView
         android:id="@+id/backImageView"
