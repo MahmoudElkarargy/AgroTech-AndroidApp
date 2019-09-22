@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+import agrotechapp.IBM.Logic.SensorData;
+import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
 
 public class ItemAdapter extends BaseAdapter {
@@ -20,6 +23,7 @@ public class ItemAdapter extends BaseAdapter {
     String[] dates;
 
     LayoutInflater mInflator;
+
 
     public ItemAdapter(Context c, String[] ids, String[] temps,String[] pH,String[] soil, String[] date){
         this.IDs = ids;
@@ -66,7 +70,6 @@ public class ItemAdapter extends BaseAdapter {
         tempTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
         soilTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
         dateTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
-
 
         String id = IDs[i];
         String temp = temps[i];

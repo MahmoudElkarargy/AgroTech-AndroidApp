@@ -22,22 +22,24 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import agrotechapp.IBM.Logic.SensorData;
 import agrotechapp.IBM.Logic.User;
 //import agrotechapp.IBM.ui.ListView.listView;
 
 public class Dashboard extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    User user = User.getInstance();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,6 +55,11 @@ public class Dashboard extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        TextView userNameTextView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.usernameTextView);
+        TextView emailTextView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.emailTextView);
+
+        userNameTextView.setText(user.getFirstName());
+        emailTextView.setText(user.getEmail());
 
     }
 

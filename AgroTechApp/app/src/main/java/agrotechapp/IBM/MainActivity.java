@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     //variables
     String email;
     String password;
-    private boolean authenticated = true;
+    private String authenticated = "False";
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             signInBtn.setBackgroundColor(res.getColor(R.color.colorDarkGrey));
             try {
-                return  User.Server.authenticateUser(strings[0],strings[1]);
+                authenticated = User.Server.authenticateUser(strings[0], strings[1]);
+                if(authenticated == "True"){
+                    user = User.getInstance();
+                    return authenticated;
+                }
+//                return  User.Server.authenticateUser(strings[0],strings[1]);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
