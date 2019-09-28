@@ -21,7 +21,7 @@ public class ItemAdapter extends BaseAdapter {
     String[] pHs;
     String[] soils;
     String[] dates;
-
+//    int num;
     LayoutInflater mInflator;
 
 
@@ -31,6 +31,7 @@ public class ItemAdapter extends BaseAdapter {
         this.pHs = pH;
         this.soils = soil;
         this.dates = date;
+//        this.num = num;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -51,6 +52,7 @@ public class ItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         View v = mInflator.inflate(R.layout.my_listview_details,null);
         TextView idTextView = (TextView) v.findViewById(R.id.IDsList);
         TextView pHTextView = (TextView) v.findViewById(R.id.pHList);

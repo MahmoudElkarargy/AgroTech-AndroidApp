@@ -14,41 +14,43 @@
 
     <string-array name="IDs">
         <item>"#2177"</item>
-        <item>"#2178"</item>
-        <item>"#2179"</item>
-        <item>"#2180"</item>
-        <item>"#2180"</item>
+        <item>"#2177"</item>
+        <item>"#2177"</item><item>"#54454"</item>
+        <item>"#2177"</item>
+
+
     </string-array>
 
     <string-array name="temps">
         <item>"29°C"</item>
         <item>"29°C"</item>
-        <item>"32°C"</item>
-        <item>"25°C"</item>
-        <item>"25°C"</item>
+        <item>"29°C"</item>
+        <item>"29°C"</item>
+        <item>"29°C"</item>
+
     </string-array>
     <string-array name="pH">
         <item>"5.13"</item>
-        <item>"5.02"</item>
-        <item>"4.60"</item>
-        <item>"5.40"</item>
-        <item>"5.40"</item>
+        <item>"5.13"</item>
+        <item>"5.13"</item>
+        <item>"5.13"</item>
+        <item>"5.13"</item>
     </string-array>
 
     <string-array name="soil">
         <item>"9.02%"</item>
-        <item>"9.70%"</item>
-        <item>"8.50%"</item>
-        <item>"9.70%"</item>
-        <item>"9.70%"</item>
+        <item>"9.02%"</item>
+        <item>"9.02%"</item>
+        <item>"9.02%"</item>
+        <item>"9.02%"</item>
     </string-array>
 
     <string-array name="date">
         <item>"21/12"</item>
-        <item>"22/12"</item>
-        <item>"25/12"</item>
-        <item>"26/12"</item>
-        <item>"26/12"</item>
+        <item>"21/12"</item>
+        <item>"21/12"</item>
+        <item>"21/12"</item>
+        <item>"21/12"</item>
     </string-array>
 
 

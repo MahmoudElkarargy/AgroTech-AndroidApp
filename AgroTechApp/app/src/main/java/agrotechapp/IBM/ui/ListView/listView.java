@@ -97,14 +97,23 @@ public class listView extends AppCompatActivity {
         for(ArrayList<SensorData> s : sensorsData) {
             for(SensorData entry : s) {
                 System.out.println(entry.getDeviceID() + " " + entry.getTime() + " " + entry.getTemperature());
-                IDs[num] = Integer.toString(entry.getDeviceID());
-                temps[num] = Double.toString(entry.getTemperature());
-                pHs[num] = Double.toString(entry.getpH());
-                soil[num] = Double.toString(entry.getSoilMoisture());
+                if(entry.getDeviceID()<10)
+                    IDs[num] = "0" + Integer.toString(entry.getDeviceID());
+                else IDs[num] = Integer.toString(entry.getDeviceID());
+                if(entry.getTemperature()<10)
+                    temps[num] = "0" + Double.toString(entry.getTemperature());
+                else temps[num] = Double.toString(entry.getTemperature());
+                if(entry.getpH()<10)
+                    pHs[num] = "0" + Double.toString(entry.getpH());
+                else pHs[num] = Double.toString(entry.getpH());
+                if(entry.getSoilMoisture()<10)
+                    soil[num] = "0" + Double.toString(entry.getSoilMoisture());
+                else soil[num] = Double.toString(entry.getSoilMoisture());
                 dates[num] = entry.getTime();
                 num++;
             }
         }
+
     }
 }
 

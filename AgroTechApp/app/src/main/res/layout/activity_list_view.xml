@@ -7,6 +7,25 @@
     android:background="@color/colorLightGreen"
     tools:context=".ui.ListView.listView">
 
+    <ListView
+        android:id="@+id/myList"
+        android:layout_width="382dp"
+        android:layout_height="176dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/colorWhite"
+        android:divider="@color/colorLightGreen"
+        android:dividerHeight="10sp"
+        android:paddingTop="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+    </ListView>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="421dp"
@@ -21,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/graphImageView">
 
         <Space
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -34,7 +53,7 @@
             android:textSize="13sp" />
 
         <Space
-            android:layout_width="63dp"
+            android:layout_width="45dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -47,7 +66,7 @@
             android:textSize="13sp" />
 
         <Space
-            android:layout_width="40dp"
+            android:layout_width="42dp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -60,7 +79,7 @@
             android:textSize="13sp" />
 
         <Space
-            android:layout_width="45sp"
+            android:layout_width="33sp"
             android:layout_height="22dp"
             android:layout_weight="0" />
 
@@ -199,25 +218,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_back" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="626dp">
-
-        <ListView
-            android:id="@+id/myList"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:divider="@color/colorLightGreen"
-            android:dividerHeight="10sp"
-            android:layout_marginTop="570dp"
-            android:layout_marginLeft="40dp"
-            android:paddingTop="10sp">
-
-        </ListView>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
