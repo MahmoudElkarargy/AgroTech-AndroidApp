@@ -91,23 +91,6 @@
             android:layout_weight="0" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/myList"
-        android:layout_width="345dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="264dp"
-        android:background="@color/colorWhite"
-        android:divider="@color/colorLightGreen"
-        android:dividerHeight="10sp"
-        android:paddingStart="-20sp"
-        android:paddingLeft="-20sp"
-        android:paddingTop="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/graphImageView">
-
-    </ListView>
-
     <ImageView
         android:id="@+id/soilMoistureImageView"
         android:layout_width="307dp"
@@ -216,5 +199,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="626dp">
+
+        <ListView
+            android:id="@+id/myList"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:divider="@color/colorLightGreen"
+            android:dividerHeight="10sp"
+            android:layout_marginTop="570dp"
+            android:layout_marginLeft="40dp"
+            android:paddingTop="10sp">
+
+        </ListView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
