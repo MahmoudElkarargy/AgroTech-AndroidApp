@@ -7,7 +7,6 @@ import agrotechapp.IBM.Logic.*;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +17,10 @@ import android.widget.TextView;
 
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     String password;
     private String authenticated = "False";
     User user;
+    Timer timer = new Timer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +105,42 @@ public class MainActivity extends AppCompatActivity {
                 Intent goToDashboard = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(goToDashboard);
                 userValidationTextView.setText("");
+
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        new getSensorsUpdates().execute();
+                    }
+                },  5*1000, 5*1000);
+
             }else{
                 userValidationTextView.setText("Invalid Username or Password");
             }
+        }
+    }
+
+    private class getSensorsUpdates extends AsyncTask<String, Void, String> {
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                authenticated = User.Server.authenticateUser(user.getEmail(), user.getPassword());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // UPDATE READINGS IN LIST VIEW
+//            for(ArrayList<SensorData> s : user.getSensorsData()) {
+//                for(SensorData entry : s) {
+//                    System.out.println(entry.getDeviceID() + " " + entry.getTime() + " " + entry.getTemperature());
+//                }
+//            }
         }
     }
 }
