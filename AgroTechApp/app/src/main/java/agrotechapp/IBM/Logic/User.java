@@ -30,12 +30,27 @@ public class User {
 	private String email;
 	private String password;
 	private ArrayList< ArrayList<SensorData>> sensorsData;
+	//sensors thresholds
+	private double tempMax;
+	private double tempMin;
+	private double pHMax;
+	private double pHMin;
+	private double soilMax;
+	private double soilMin;
 	
-	private User(String firstName, String lastName, String email, ArrayList< ArrayList<SensorData>> sensorsData ) {
+	private User(String firstName, String lastName, String email, String password, ArrayList< ArrayList<SensorData>> sensorsData,
+	double tempMax, double tempMin, double pHMax, double pHMin, double soilMax, double soilMin) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
 		this.sensorsData = sensorsData;
+		this.tempMax = tempMax;
+		this.tempMin = tempMin;
+		this.pHMax = pHMax;
+		this.pHMin = pHMin;
+		this.soilMax = soilMax;
+		this.soilMin = soilMin;
 	}
 
 
@@ -67,6 +82,18 @@ public class User {
 	public ArrayList<ArrayList<SensorData>> getSensorsData() {
 		return sensorsData;
 	}
+
+	public double getTempMax() { return tempMax; }
+
+	public double getTempMin() { return tempMin; }
+
+	public double getpHMax() { return pHMax; }
+
+	public double getpHMin() { return pHMin; }
+
+	public double getSoilMax() { return soilMax; }
+
+	public double getSoilMin() { return soilMin; }
 	
 	
 	public static class Server {
@@ -142,7 +169,14 @@ public class User {
 			instance = new User(userJS.getString("firstname"),
 					userJS.getString("lastname"),
 					userJS.getString("email"),
-					sensorsData);
+					userJS.getString("password"),
+					sensorsData,
+					userJS.getDouble("tempMax"),
+					userJS.getDouble("tempMin"),
+					userJS.getDouble("pHMax"),
+					userJS.getDouble("pHMin"),
+					userJS.getDouble("soilMax"),
+					userJS.getDouble("soilMin"));
 		}
 	}
 }
