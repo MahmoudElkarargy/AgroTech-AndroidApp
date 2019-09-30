@@ -43,20 +43,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation files('libs/json-20190722.jar')
-    implementation files('libs/commons-codec-1.11.jar')
-    implementation files('libs/commons-logging-1.2.jar')
-    implementation files('libs/fluent-hc-4.5.10.jar')
-    implementation files('libs/httpclient-4.5.10.jar')
-    implementation files('libs/httpclient-cache-4.5.10.jar')
-    implementation files('libs/httpclient-win-4.5.10.jar')
-    implementation files('libs/httpcore-4.4.12.jar')
-    implementation files('libs/httpmime-4.5.10.jar')
-    implementation files('libs/jna-4.5.2.jar')
-    implementation files('libs/jna-platform-4.5.2.jar')
-    implementation files('libs/commons-lang3-3.9.jar')
-    implementation files('libs/commons-lang3-3.9-sources.jar')
-    implementation files('libs/commons-lang3-3.9-test-sources.jar')
-    implementation files('libs/commons-lang3-3.9-tests.jar')
+    implementation 'org.apache.commons:commons-lang3:3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'com.ibm.wiotp:com.ibm.wiotp.sdk:0.1.0'
+
 //    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 }

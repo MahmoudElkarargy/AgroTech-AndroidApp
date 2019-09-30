@@ -1,5 +1,10 @@
 package agrotechapp.IBM;
 
+import com.ibm.wiotp.sdk.app.ApplicationClient;
+import com.ibm.wiotp.sdk.codecs.JsonCodec;
+import com.ibm.wiotp.sdk.device.DeviceClient;
+import com.ibm.wiotp.sdk.device.config.DeviceConfig;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +16,17 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void addition_isCorrect() throws Exception {
+//        assertEquals(4, 2 + 2);
+
+//        DeviceConfig config = DeviceConfig.generateFromEnv();
+//        DeviceClient  client = new DeviceClient(config);
+//        client.registerCodec(new JsonCodec());
+//        client.connect();
+
+        ApplicationClient appClient = new ApplicationClient();
+        appClient.registerCodec(new JsonCodec());
+        appClient.connect();
+
     }
 }
