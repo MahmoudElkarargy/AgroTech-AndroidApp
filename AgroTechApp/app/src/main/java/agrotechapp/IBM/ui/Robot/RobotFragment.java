@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -58,45 +59,71 @@ public class RobotFragment extends Fragment {
             }
         });
 
-            forwardImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //send forward command
-                    if(isManualMode){
-                        new sendCommand().execute("manual","F", speedEditText.getText().toString());
+        forwardImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(isManualMode){
+                    if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        //released
+                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                    } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        //pressed
+                        new sendCommand().execute("manual", "F", speedEditText.getText().toString());
                     }
                 }
-            });
+                return true;
+            }
+        });
 
-            rightImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //send right command
-                    if(isManualMode){
-                        new sendCommand().execute("manual","R", speedEditText.getText().toString());
-                    }
-                }
-            });
 
-            leftImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //send left command
-                    if(isManualMode){
-                        new sendCommand().execute("manual","L", speedEditText.getText().toString());
+        rightImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(isManualMode){
+                    if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        //released
+                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                    } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        //pressed
+                        new sendCommand().execute("manual", "R", speedEditText.getText().toString());
                     }
                 }
-            });
+                return true;
+            }
+        });
 
-            backImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //send back command
-                    if(isManualMode){
-                        new sendCommand().execute("manual","B", speedEditText.getText().toString());
+
+        leftImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(isManualMode){
+                    if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        //released
+                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                    } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        //pressed
+                        new sendCommand().execute("manual", "L", speedEditText.getText().toString());
                     }
                 }
-            });
+                return true;
+            }
+        });
+
+        backImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(isManualMode){
+                    if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                        //released
+                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                    } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        //pressed
+                        new sendCommand().execute("manual", "B", speedEditText.getText().toString());
+                    }
+                }
+                return true;
+            }
+        });
         return root;
     }
 
@@ -106,10 +133,10 @@ public class RobotFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                RobotCommand.sendCommand(strings[0],strings[1],strings[2]);
+                RobotCommand.sendCommand(strings[0], strings[1], strings[2]);
                 command = strings[1] + strings[2];
                 return "True";
-            }catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return "False";
@@ -117,13 +144,13 @@ public class RobotFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            if(result.equals("True")){
-                if(isManualMode){
+            if (result.equals("True")) {
+                if (isManualMode) {
                     commandTextView.setText(command);
-                }else{
+                } else {
                     commandTextView.setText("Auto");
                 }
-            }else{
+            } else {
                 commandTextView.setText("Unable to send command");
             }
         }
