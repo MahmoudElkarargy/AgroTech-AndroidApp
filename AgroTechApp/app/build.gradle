@@ -45,7 +45,13 @@ dependencies {
     implementation files('libs/json-20190722.jar')
     implementation 'org.apache.commons:commons-lang3:3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+//    implementation ('com.github.javafaker:javafaker:0.14') { exclude module: 'org.yaml' }
+//    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.25'
     implementation 'com.ibm.wiotp:com.ibm.wiotp.sdk:0.1.0'
+//    implementation 'org.slf4j:slf4j-simple:1.7.21'
+//    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.2'
+
+
 
 
 //    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'

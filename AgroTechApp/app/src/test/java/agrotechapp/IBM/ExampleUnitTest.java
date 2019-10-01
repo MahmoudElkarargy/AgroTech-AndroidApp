@@ -1,7 +1,6 @@
 package agrotechapp.IBM;
 
 import com.google.gson.JsonObject;
-import com.ibm.wiotp.sdk.app.ApplicationClient;
 import com.ibm.wiotp.sdk.codecs.JsonCodec;
 import com.ibm.wiotp.sdk.device.DeviceClient;
 import com.ibm.wiotp.sdk.device.config.DeviceConfig;
@@ -44,15 +43,19 @@ public class ExampleUnitTest {
 //        appClient.connect();
 
 
-        DeviceConfigIdentity identity = new DeviceConfigIdentity("bo5aph","PiGateway","myPiGateway");
-        DeviceConfigAuth auth = new DeviceConfigAuth("12345678");
+        DeviceConfigIdentity identity = new DeviceConfigIdentity("bo5aph","typedevice","pidevice");
+        DeviceConfigAuth auth = new DeviceConfigAuth("123456789");
         DeviceConfigOptions options = new DeviceConfigOptions();
         DeviceConfig config = new DeviceConfig(identity, auth,options);
         DeviceClient deviceClient2 = new DeviceClient(config);
         deviceClient2.registerCodec(new JsonCodec());
         deviceClient2.connect();
+        JsonObject data = new JsonObject();
+        data.addProperty("mode", "manual");
+        data.addProperty("dir", "F");
+        data.addProperty("speed", "100");
+        deviceClient2.publishEvent("data", data);
 
-
-
+        deviceClient2.disconnect();
     }
 }
