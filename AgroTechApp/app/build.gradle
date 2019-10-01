@@ -47,5 +47,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
     implementation 'com.ibm.wiotp:com.ibm.wiotp.sdk:0.1.0'
 
+
 //    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 }
