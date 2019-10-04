@@ -93,17 +93,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/fieldOne"
-        android:layout_width="380dp"
-        android:layout_height="247dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fieldone" />
-
     <ImageView
         android:id="@+id/invisibleMap"
         android:layout_width="380dp"
@@ -114,5 +103,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/invisiblemap" />
+    <ImageView
+        android:id="@+id/fieldOne"
+        android:layout_width="380dp"
+        android:layout_height="247dp"
+        android:layout_marginTop="119dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fieldone" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
