@@ -76,19 +76,21 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         int currentResource = (tagNum == null) ? R.drawable.fieldone : tagNum.intValue ();
 
         switch (action) {
-            case MotionEvent.ACTION_DOWN :
-                if (currentResource == R.drawable.fieldone) {
-                    nextImage = R.drawable.fieldtwo;
-                    handledHere = true;
-       /*
-       } else if (currentResource != R.drawable.p2_ship_default) {
-         nextImage = R.drawable.p2_ship_default;
-         handledHere = true;
-       */
-                } else handledHere = true;
-                break;
+//            case MotionEvent.ACTION_DOWN :
+//                if (currentResource == R.drawable.fieldone) {
+//                    Log.d("myTag","3'eart??");
+////                    nextImage = R.drawable.fieldtwo;
+//                    handledHere = true;
+//       /*
+//       } else if (currentResource != R.drawable.p2_ship_default) {
+//         nextImage = R.drawable.p2_ship_default;
+//         handledHere = true;
+//       */
+//                } else handledHere = true;
+//                break;
 
-            case MotionEvent.ACTION_UP :
+            case MotionEvent.ACTION_BUTTON_PRESS :
+                Log.d("myTag","ActionUp");
                 // On the UP, we do the click action.
                 // The hidden image (image_areas) has three different hotspots on it.
                 // The colors are red, blue, and yellow.
@@ -102,8 +104,14 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 ColorTool ct = new ColorTool ();
                 int tolerance = 25;
                 nextImage = R.drawable.fieldone;
-                if (ct.closeMatch (Color.RED, touchColor, tolerance)) nextImage = R.drawable.fieldone;
-                else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) nextImage = R.drawable.fieldtwo;
+                if (ct.closeMatch (Color.RED, touchColor, tolerance)) {
+                    nextImage = R.drawable.fieldone;
+                    Log.d("myTag","FieldOne Clicked");
+                }
+                else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {
+                    nextImage = R.drawable.fieldtwo;
+                    Log.d("myTag","FieldTwooo Clicked");
+                }
 
                 // If the next image is the same as the last image, go back to the default.
                 // toast ("Current image: " + currentResource + " next: " + nextImage);
