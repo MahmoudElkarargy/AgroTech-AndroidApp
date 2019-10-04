@@ -26,19 +26,17 @@ import agrotechapp.IBM.ui.ListView.listView;
 public class HomeFragment extends Fragment implements View.OnTouchListener{
 
     private HomeViewModel homeViewModel;
-
+    View root;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
 
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        root = inflater.inflate(R.layout.fragment_home, container, false);
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
-        Log.d("myTag","Height: "+fieldOne.getHeight());
         if (fieldOne != null) {
-            Log.d("myTag","here");
             fieldOne.setOnTouchListener ((View.OnTouchListener) this);
         }
 
@@ -89,13 +87,13 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 //                } else handledHere = true;
 //                break;
 
-            case MotionEvent.ACTION_BUTTON_PRESS :
+            case MotionEvent.ACTION_DOWN :
                 Log.d("myTag","ActionUp");
                 // On the UP, we do the click action.
                 // The hidden image (image_areas) has three different hotspots on it.
                 // The colors are red, blue, and yellow.
                 // Use image_areas to determine which region the user touched.
-                int touchColor = getHotspotColor (R.id.invisibleMap, evX, evY,v);
+                int touchColor = getHotspotColor (R.id.invisibleMap, evX, evY);
 
                 // Compare the touchColor to the expected values. Switch to a different image, depending on what color was touched.
                 // Note that we use a Color Tool object to test whether the observed color is close enough to the real color to
@@ -103,21 +101,22 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 // varying pixel density.
                 ColorTool ct = new ColorTool ();
                 int tolerance = 25;
-                nextImage = R.drawable.fieldone;
-                if (ct.closeMatch (Color.RED, touchColor, tolerance)) {
-                    nextImage = R.drawable.fieldone;
-                    Log.d("myTag","FieldOne Clicked");
-                }
-                else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {
+//                nextImage = R.drawable.fieldone;
+                if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {
                     nextImage = R.drawable.fieldtwo;
                     Log.d("myTag","FieldTwooo Clicked");
+                }
+                else if(ct.closeMatch (Color.RED, touchColor, tolerance)){
+//
+                    nextImage = R.drawable.fieldone;
+                    Log.d("myTag","FieldOne Clicked");
                 }
 
                 // If the next image is the same as the last image, go back to the default.
                 // toast ("Current image: " + currentResource + " next: " + nextImage);
-                if (currentResource == nextImage) {
-                    nextImage = R.drawable.fieldone;
-                }
+//                if (currentResource == nextImage) {
+//                    nextImage = R.drawable.fieldone;
+//                }
                 handledHere = true;
                 break;
 
@@ -136,16 +135,14 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     }
 
 
-    public int getHotspotColor (int hotspotId, int x, int y, View root) {
+    public int getHotspotColor (int hotspotId, int x, int y) {
         ImageView img = (ImageView) root.findViewById (hotspotId);
         if (img == null) {
-            Log.d ("ImageAreasActivity", "Hot spot image not found");
             return 0;
         } else {
             img.setDrawingCacheEnabled(true);
             Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
             if (hotspots == null) {
-                Log.d ("ImageAreasActivity", "Hot spot bitmap was not created");
                 return 0;
             } else {
                 img.setDrawingCacheEnabled(false);

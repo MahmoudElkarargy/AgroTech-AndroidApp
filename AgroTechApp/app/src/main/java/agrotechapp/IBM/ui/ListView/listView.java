@@ -82,6 +82,8 @@ public class listView extends AppCompatActivity {
 
         //parsing sensors data;
         parseSensorData(sensorsData);
+        drawGraph();
+
 
 
         ItemAdapter itemAdapter = new ItemAdapter(this,IDs,temps,pHs,soil,dates);
@@ -107,7 +109,6 @@ public class listView extends AppCompatActivity {
             }
         });
 
-        drawGraph();
 
     }
 
@@ -177,6 +178,7 @@ public class listView extends AppCompatActivity {
         cartesian.title("");
 
         cartesian.yAxis(0).title("");
+        cartesian.xAxis(0).title("Time");
         cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
         List<DataEntry> seriesData = new ArrayList<>();
@@ -201,8 +203,9 @@ public class listView extends AppCompatActivity {
 
         Line series1 = cartesian.line(series1Mapping);
         series1.name("Temperature");
+        series1.tooltip().adjustFontSize();
         series1.hovered().markers().enabled(true);
-        series1.hovered().markers()
+        series1.hovered()
                 .type(MarkerType.CIRCLE)
                 .size(4d);
         series1.tooltip()
@@ -241,6 +244,7 @@ public class listView extends AppCompatActivity {
 
         anyChartView.setChart(cartesian);
     }
+
 
     private String[] getTimes(String[] dates) throws ParseException {
         //return times from dates and sort them

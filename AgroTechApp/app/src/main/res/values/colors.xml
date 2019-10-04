@@ -6,6 +6,7 @@
     <color name = "colorWhite">#FFFFFF</color>
     <color name="colorGrey">#f0f0f0</color>
     <color name="colorRed">#D81B60</color>
+    <color name="red">#eb1c23</color>
     <color name="colorLightGreen">#F4FAF2</color>
     <color name="colorDarkGrey">#787878</color>
 </resources>
