@@ -23,7 +23,7 @@ public class ItemAdapter extends BaseAdapter {
     String[] dates;
 //    int num;
     LayoutInflater mInflator;
-
+    User user;
 
     public ItemAdapter(Context c, String[] ids, String[] temps,String[] pH,String[] soil, String[] date){
         this.IDs = ids;
@@ -53,6 +53,7 @@ public class ItemAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
+        user = User.getInstance();
         View v = mInflator.inflate(R.layout.my_listview_details,null);
         TextView idTextView = (TextView) v.findViewById(R.id.IDsList);
         TextView pHTextView = (TextView) v.findViewById(R.id.pHList);
@@ -67,17 +68,33 @@ public class ItemAdapter extends BaseAdapter {
         dateTextView.setTextSize(16);
         dateTextView.setTextSize(16);
 
-        idTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
-        pHTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
-        tempTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
-        soilTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
-        dateTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
-
         String id = IDs[i];
         String temp = temps[i];
         String pH = pHs[i];
         String soil = soils[i];
         String date = dates[i];
+
+        idTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+
+        if(Double.valueOf(pH)>user.getpHMax() || Double.valueOf(pH)<user.getpHMin())
+            pHTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+        else
+            pHTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+
+
+        if(Double.valueOf(temp)>user.getTempMax() || Double.valueOf(temp)<user.getTempMin())
+            tempTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+        else
+            tempTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+
+        if(Double.valueOf(soil)>user.getSoilMax() || Double.valueOf(soil)<user.getSoilMin())
+            soilTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+        else
+            soilTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+
+        dateTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+
+
 
         idTextView.setText(id);
         pHTextView.setText(pH);
