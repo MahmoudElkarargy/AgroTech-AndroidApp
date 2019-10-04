@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         int nextImage = -1;			// resource id of the next image to display
 
         ImageView fieldone = (ImageView) v.findViewById (R.id.fieldOne);
+        TextView fieldNumTextView = (TextView)root.findViewById(R.id.fieldNumTextView);
         if (fieldone == null) return false;
 
         Integer tagNum = (Integer) fieldone.getTag ();
@@ -104,11 +105,13 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 //                nextImage = R.drawable.fieldone;
                 if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {
                     nextImage = R.drawable.fieldtwo;
+                    fieldNumTextView.setText("FIELD 2");
                     Log.d("myTag","FieldTwooo Clicked");
                 }
                 else if(ct.closeMatch (Color.GREEN, touchColor, tolerance)){
 //
                     nextImage = R.drawable.fieldone;
+                    fieldNumTextView.setText("FIELD 1");
                     Log.d("myTag","FieldOne Clicked");
                 }
 
