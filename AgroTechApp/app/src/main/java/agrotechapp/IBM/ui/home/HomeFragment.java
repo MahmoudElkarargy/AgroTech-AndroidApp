@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                     nextImage = R.drawable.fieldtwo;
                     Log.d("myTag","FieldTwooo Clicked");
                 }
-                else if(ct.closeMatch (Color.RED, touchColor, tolerance)){
+                else if(ct.closeMatch (Color.GREEN, touchColor, tolerance)){
 //
                     nextImage = R.drawable.fieldone;
                     Log.d("myTag","FieldOne Clicked");
