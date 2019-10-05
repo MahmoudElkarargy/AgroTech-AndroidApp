@@ -21,6 +21,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.gson.JsonObject;
+import com.ibm.wiotp.sdk.codecs.JsonCodec;
+import com.ibm.wiotp.sdk.device.DeviceClient;
+import com.ibm.wiotp.sdk.device.config.DeviceConfig;
+import com.ibm.wiotp.sdk.device.config.DeviceConfigAuth;
+import com.ibm.wiotp.sdk.device.config.DeviceConfigIdentity;
+import com.ibm.wiotp.sdk.device.config.DeviceConfigOptions;
+
 import agrotechapp.IBM.Dashboard;
 import agrotechapp.IBM.Logic.*;
 
@@ -36,9 +44,8 @@ public class RobotFragment extends Fragment {
     boolean isManualMode = false;
     TextView commandTextView;
     String command;
-
     private RobotViewModel galleryViewModel;
-
+    RobotCommand robot;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
@@ -59,16 +66,24 @@ public class RobotFragment extends Fragment {
             }
         });
 
+        try{
+            robot.initServer();
+        }catch (Exception e){
+
+        }
+
         forwardImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(isManualMode){
                     if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                         //released
-                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+//                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                        forwardImageView.setImageResource(R.drawable.arrow);
                     } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         //pressed
-                        new sendCommand().execute("manual", "F", speedEditText.getText().toString());
+//                        new sendCommand().execute("manual", "F", speedEditText.getText().toString());
+                        forwardImageView.setImageResource(R.drawable.arrow_green);
                     }
                 }
                 return true;
@@ -83,9 +98,11 @@ public class RobotFragment extends Fragment {
                     if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                         //released
                         new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                        rightImageView.setImageResource(R.drawable.arrow);
                     } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         //pressed
                         new sendCommand().execute("manual", "R", speedEditText.getText().toString());
+                        rightImageView.setImageResource(R.drawable.arrow_green);
                     }
                 }
                 return true;
@@ -100,9 +117,11 @@ public class RobotFragment extends Fragment {
                     if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                         //released
                         new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                        leftImageView.setImageResource(R.drawable.arrow);
                     } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         //pressed
                         new sendCommand().execute("manual", "L", speedEditText.getText().toString());
+                        leftImageView.setImageResource(R.drawable.arrow_green);
                     }
                 }
                 return true;
@@ -116,9 +135,11 @@ public class RobotFragment extends Fragment {
                     if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                         //released
                         new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                        backImageView.setImageResource(R.drawable.arrow);
                     } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         //pressed
                         new sendCommand().execute("manual", "B", speedEditText.getText().toString());
+                        backImageView.setImageResource(R.drawable.arrow_green);
                     }
                 }
                 return true;
@@ -155,4 +176,5 @@ public class RobotFragment extends Fragment {
             }
         }
     }
+
 }

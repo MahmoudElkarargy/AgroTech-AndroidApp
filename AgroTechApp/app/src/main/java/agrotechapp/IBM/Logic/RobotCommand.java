@@ -1,5 +1,13 @@
 package agrotechapp.IBM.Logic;
 
+import com.google.gson.JsonObject;
+import com.ibm.wiotp.sdk.codecs.JsonCodec;
+import com.ibm.wiotp.sdk.device.DeviceClient;
+import com.ibm.wiotp.sdk.device.config.DeviceConfig;
+import com.ibm.wiotp.sdk.device.config.DeviceConfigAuth;
+import com.ibm.wiotp.sdk.device.config.DeviceConfigIdentity;
+import com.ibm.wiotp.sdk.device.config.DeviceConfigOptions;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,6 +20,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RobotCommand {
+
+    DeviceClient deviceClient2;
 
     private static String urlComm = "https://nodered-ibmdigitalnationcompetition.eu-gb.mybluemix.net/robotCommands";
 
@@ -43,8 +53,25 @@ public class RobotCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return "True";
+    }
+
+    public void initServer() throws Exception{
+        DeviceConfigIdentity identity = new DeviceConfigIdentity("bo5aph","typedevice","pidevice");
+        DeviceConfigAuth auth = new DeviceConfigAuth("123456789");
+        DeviceConfigOptions options = new DeviceConfigOptions();
+        DeviceConfig config = new DeviceConfig(identity, auth,options);
+        deviceClient2 = new DeviceClient(config);
+        deviceClient2.registerCodec(new JsonCodec());
+        deviceClient2.connect();
+    }
+
+    public void send(String mode, String command, String speed){
+        JsonObject data = new JsonObject();
+        data.addProperty("mode", mode);
+        data.addProperty("dir", command);
+        data.addProperty("speed", speed);
+        deviceClient2.publishEvent("data", data);
     }
 
 }

@@ -95,11 +95,22 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:id="@+id/fieldOne"
+        android:layout_width="380dp"
+        android:layout_height="247dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="3sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fieldone" />
+
+    <ImageView
         android:id="@+id/mapBackgroundImageView"
         android:layout_width="380dp"
         android:layout_height="339dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         android:background="@color/colorWhite"
         android:elevation="2sp"
@@ -113,23 +124,26 @@
         android:id="@+id/invisibleMap"
         android:layout_width="380dp"
         android:layout_height="247dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="16dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/invisiblemap" />
 
-    <ImageView
-        android:id="@+id/fieldOne"
-        android:layout_width="380dp"
-        android:layout_height="247dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="16dp"
-        android:elevation="2sp"
+    <TextView
+        android:id="@+id/fieldNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:elevation="3sp"
+        android:text="FIELD 1"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/mapBackgroundImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fieldone" />
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/fieldsViewTextView"
@@ -145,21 +159,7 @@
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mapBackgroundImageView"
-        app:layout_constraintVertical_bias="0.533" />
-
-    <TextView
-        android:id="@+id/fieldNumTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textStyle="normal"
-        android:text="FIELD 1"
-        android:textSize="18sp"
-        android:elevation="3sp"
-        app:layout_constraintBottom_toBottomOf="@+id/mapBackgroundImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintVertical_bias="0.548" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
