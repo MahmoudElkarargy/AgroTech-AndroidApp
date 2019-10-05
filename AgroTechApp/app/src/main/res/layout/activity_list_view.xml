@@ -176,7 +176,7 @@
         android:layout_marginTop="52dp"
         android:text="Crop type"
         android:textColor="@color/colorDarkGrey"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/fieldImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.904"

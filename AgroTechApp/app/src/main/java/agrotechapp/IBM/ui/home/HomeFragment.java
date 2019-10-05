@@ -27,6 +27,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
     private HomeViewModel homeViewModel;
     View root;
+    private static int fieldNumber=1;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -75,21 +76,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         int currentResource = (tagNum == null) ? R.drawable.fieldone : tagNum.intValue ();
 
         switch (action) {
-//            case MotionEvent.ACTION_DOWN :
-//                if (currentResource == R.drawable.fieldone) {
-//                    Log.d("myTag","3'eart??");
-////                    nextImage = R.drawable.fieldtwo;
-//                    handledHere = true;
-//       /*
-//       } else if (currentResource != R.drawable.p2_ship_default) {
-//         nextImage = R.drawable.p2_ship_default;
-//         handledHere = true;
-//       */
-//                } else handledHere = true;
-//                break;
 
             case MotionEvent.ACTION_DOWN :
-                Log.d("myTag","ActionUp");
+//                Log.d("myTag","ActionUp");
                 // On the UP, we do the click action.
                 // The hidden image (image_areas) has three different hotspots on it.
                 // The colors are red, blue, and yellow.
@@ -106,13 +95,15 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {
                     nextImage = R.drawable.fieldtwo;
                     fieldNumTextView.setText("FIELD 2");
-                    Log.d("myTag","FieldTwooo Clicked");
+                    fieldNumber =2;
+//                    Log.d("myTag","FieldTwooo Clicked");
                 }
                 else if(ct.closeMatch (Color.GREEN, touchColor, tolerance)){
 //
                     nextImage = R.drawable.fieldone;
                     fieldNumTextView.setText("FIELD 1");
-                    Log.d("myTag","FieldOne Clicked");
+                    fieldNumber =1;
+//                    Log.d("myTag","FieldOne Clicked");
                 }
 
                 // If the next image is the same as the last image, go back to the default.
@@ -152,5 +143,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 return hotspots.getPixel(x, y);
             }
         }
+    }
+
+    public int getFieldNumber() {
+        return fieldNumber;
     }
 }

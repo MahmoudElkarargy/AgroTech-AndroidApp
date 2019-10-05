@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -29,10 +30,6 @@ import com.anychart.enums.MarkerType;
 import com.anychart.enums.TooltipPositionMode;
 import com.anychart.graphics.vector.Stroke;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,23 +41,25 @@ import agrotechapp.IBM.Dashboard;
 import agrotechapp.IBM.Logic.SensorData;
 import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
+import agrotechapp.IBM.ui.home.HomeFragment;
 
 public class listView extends AppCompatActivity {
 
     ListView myListView;
     ImageView backImageView;
     TextView backTextView;
-
+    TextView fieldNumberTextView;
+    TextView cropTypeTextView;
     String[] IDs ;
     String[] temps;
     String[] pHs;
     String[] soil;
     String[] dates;
-
+    int numberOfSelectedField=0;
     private Date dateTimes;
     private String[] time;
-
-
+    int numberOfSensorData=0;
+    HomeFragment homeFragment = new HomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +73,29 @@ public class listView extends AppCompatActivity {
 
         Resources res = getResources();
         myListView = (ListView) findViewById(R.id.myList);
-        IDs = res.getStringArray(R.array.IDs);
-        temps = res.getStringArray(R.array.temps);
-        pHs = res.getStringArray(R.array.pH);
-        soil = res.getStringArray(R.array.soil);
-        dates = res.getStringArray(R.array.date);
 
         //parsing sensors data;
         parseSensorData(sensorsData);
         drawGraph();
 
 
-
-        ItemAdapter itemAdapter = new ItemAdapter(this,IDs,temps,pHs,soil,dates);
+//        Log.d("myTag","nbof Selected: "+numberOfSelectedField);
+        ItemAdapter itemAdapter = new ItemAdapter(this,IDs,temps,pHs,soil,dates,numberOfSelectedField);
         myListView.setAdapter(itemAdapter);
 
 
         backImageView = findViewById(R.id.backImageView);
         backTextView = findViewById(R.id.backTextView);
-
+        fieldNumberTextView = findViewById(R.id.fieldNumTextView);
+        cropTypeTextView = findViewById(R.id.cropTypeTextView);
+        if(homeFragment.getFieldNumber()==1){
+            fieldNumberTextView.setText("FIELD NUMBER ONE");
+            cropTypeTextView.setText("WHEAT CROPS");
+        }
+        else{
+            fieldNumberTextView.setText("FIELD NUMBER TWO");
+            cropTypeTextView.setText("RICE CROPS");
+        }
         backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,23 +138,40 @@ public class listView extends AppCompatActivity {
 
     private void parseSensorData(ArrayList<ArrayList<SensorData>> sensorsData){
         int num = 0;
+//        Log.d("myTag","I selected: "+homeFragment.getFieldNumber());
+        for(ArrayList<SensorData> s : sensorsData) {
+            for (SensorData entry : s) {
+                if (entry.getDeviceID() == homeFragment.getFieldNumber()) {
+                    numberOfSelectedField++;
+                }
+            }
+        }
+//        Log.d("myTag","nb: "+numberOfSelectedField);
+        IDs = new String[numberOfSelectedField];
+        temps = new String[numberOfSelectedField];
+        pHs = new String[numberOfSelectedField];
+        soil = new String[numberOfSelectedField];
+        dates = new String[numberOfSelectedField];
+
         for(ArrayList<SensorData> s : sensorsData) {
             for(SensorData entry : s) {
-                System.out.println(entry.getDeviceID() + " " + entry.getTime() + " " + entry.getTemperature());
-                if(entry.getDeviceID()<10)
-                    IDs[num] = "0" + Integer.toString(entry.getDeviceID());
-                else IDs[num] = Integer.toString(entry.getDeviceID());
-                if(entry.getTemperature()<10)
-                    temps[num] = "0" + Double.toString(entry.getTemperature());
-                else temps[num] = Double.toString(entry.getTemperature());
-                if(entry.getpH()<10)
-                    pHs[num] = "0" + Double.toString(entry.getpH());
-                else pHs[num] = Double.toString(entry.getpH());
-                if(entry.getSoilMoisture()<10)
-                    soil[num] = "0" + Double.toString(entry.getSoilMoisture());
-                else soil[num] = Double.toString(entry.getSoilMoisture());
-                dates[num] = entry.getTime();
-                num++;
+                if (entry.getDeviceID() == homeFragment.getFieldNumber()) {
+                    if (entry.getDeviceID() < 10)
+                        IDs[num] = "0" + Integer.toString(entry.getDeviceID());
+                    else IDs[num] = Integer.toString(entry.getDeviceID());
+                    if (entry.getTemperature() < 10)
+                        temps[num] = "0" + Double.toString(entry.getTemperature());
+                    else temps[num] = Double.toString(entry.getTemperature());
+                    if (entry.getpH() < 10)
+                        pHs[num] = "0" + Double.toString(entry.getpH());
+                    else pHs[num] = Double.toString(entry.getpH());
+                    if (entry.getSoilMoisture() < 10)
+                        soil[num] = "0" + Double.toString(entry.getSoilMoisture());
+                    else soil[num] = Double.toString(entry.getSoilMoisture());
+                    dates[num] = entry.getTime();
+                    num++;
+                }
+                else continue;
             }
         }
 
