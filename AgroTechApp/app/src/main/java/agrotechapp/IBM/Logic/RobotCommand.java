@@ -60,6 +60,9 @@ public class RobotCommand {
         DeviceConfigIdentity identity = new DeviceConfigIdentity("bo5aph","typedevice","pidevice");
         DeviceConfigAuth auth = new DeviceConfigAuth("123456789");
         DeviceConfigOptions options = new DeviceConfigOptions();
+//        options.mqtt.keepAlive = 3;
+        options.mqtt.sessionExpiry = 0;
+        options.mqtt.cleanStart = true;
         DeviceConfig config = new DeviceConfig(identity, auth,options);
         deviceClient2 = new DeviceClient(config);
         deviceClient2.registerCodec(new JsonCodec());

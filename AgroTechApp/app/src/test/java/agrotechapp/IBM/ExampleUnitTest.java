@@ -46,6 +46,8 @@ public class ExampleUnitTest {
         DeviceConfigIdentity identity = new DeviceConfigIdentity("bo5aph","typedevice","pidevice");
         DeviceConfigAuth auth = new DeviceConfigAuth("123456789");
         DeviceConfigOptions options = new DeviceConfigOptions();
+        options.mqtt.port = 8883;
+        options.mqtt.keepAlive = 1;
         DeviceConfig config = new DeviceConfig(identity, auth,options);
         DeviceClient deviceClient2 = new DeviceClient(config);
         deviceClient2.registerCodec(new JsonCodec());
