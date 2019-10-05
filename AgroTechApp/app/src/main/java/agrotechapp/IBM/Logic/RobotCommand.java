@@ -21,9 +21,9 @@ import okhttp3.Response;
 
 public class RobotCommand {
 
-    DeviceClient deviceClient2;
 
     private static String urlComm = "https://nodered-ibmdigitalnationcompetition.eu-gb.mybluemix.net/robotCommands";
+    DeviceClient deviceClient2;
 
 
     public static String sendCommand(String mode, String dir, String speed) throws JSONException {
@@ -66,13 +66,12 @@ public class RobotCommand {
         deviceClient2.connect();
     }
 
-    public void send(String mode, String command, String speed){
+    public void send(String mode, String command, String speed) throws Exception{
         JsonObject data = new JsonObject();
         data.addProperty("mode", mode);
         data.addProperty("dir", command);
         data.addProperty("speed", speed);
         deviceClient2.publishEvent("data", data);
     }
-
 }
 

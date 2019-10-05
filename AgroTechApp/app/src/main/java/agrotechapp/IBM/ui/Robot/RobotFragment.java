@@ -45,7 +45,8 @@ public class RobotFragment extends Fragment {
     TextView commandTextView;
     String command;
     private RobotViewModel galleryViewModel;
-    RobotCommand robot;
+    RobotCommand robot = new RobotCommand();
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
@@ -66,11 +67,8 @@ public class RobotFragment extends Fragment {
             }
         });
 
-        try{
-            robot.initServer();
-        }catch (Exception e){
+        new initServer().execute();
 
-        }
 
         forwardImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -78,11 +76,11 @@ public class RobotFragment extends Fragment {
                 if(isManualMode){
                     if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
                         //released
-//                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+                        new sendCommand().execute("manual", "S", speedEditText.getText().toString());
                         forwardImageView.setImageResource(R.drawable.arrow);
                     } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         //pressed
-//                        new sendCommand().execute("manual", "F", speedEditText.getText().toString());
+                        new sendCommand().execute("manual", "F", speedEditText.getText().toString());
                         forwardImageView.setImageResource(R.drawable.arrow_green);
                     }
                 }
@@ -154,10 +152,10 @@ public class RobotFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                RobotCommand.sendCommand(strings[0], strings[1], strings[2]);
+                robot.send(strings[0], strings[1], strings[2]);
                 command = strings[1] + strings[2];
                 return "True";
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return "False";
@@ -173,6 +171,31 @@ public class RobotFragment extends Fragment {
                 }
             } else {
                 commandTextView.setText("Unable to send command");
+            }
+        }
+    }
+
+    private class initServer extends AsyncTask<String, Void, String> {
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                robot.initServer();
+                return "True";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "False";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result.equals("True")) {
+                System.out.println("server initialized succesfully");
+                commandTextView.setText("send command");
+            } else {
+                commandTextView.setText("Unable to initialize server command");
             }
         }
     }
