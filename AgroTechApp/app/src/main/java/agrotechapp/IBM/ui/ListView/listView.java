@@ -21,14 +21,19 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
+import com.anychart.charts.Cartesian3d;
 import com.anychart.charts.Pie;
+import com.anychart.core.cartesian.series.Area3d;
 import com.anychart.core.cartesian.series.Line;
 import com.anychart.data.Mapping;
 import com.anychart.data.Set;
 import com.anychart.enums.Anchor;
+import com.anychart.enums.HoverMode;
 import com.anychart.enums.MarkerType;
+import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 import com.anychart.graphics.vector.Stroke;
+import com.anychart.graphics.vector.hatchfill.HatchFillType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +55,9 @@ public class listView extends AppCompatActivity {
     TextView backTextView;
     TextView fieldNumberTextView;
     TextView cropTypeTextView;
+    TextView tempReadingTextView;
+    TextView pHReadingTextView;
+    TextView soilReadingTextView;
     String[] IDs ;
     String[] temps;
     String[] pHs;
@@ -89,11 +97,11 @@ public class listView extends AppCompatActivity {
         fieldNumberTextView = findViewById(R.id.fieldNumTextView);
         cropTypeTextView = findViewById(R.id.cropTypeTextView);
         if(homeFragment.getFieldNumber()==1){
-            fieldNumberTextView.setText("FIELD NUMBER ONE");
+            fieldNumberTextView.setText("FIELD 1");
             cropTypeTextView.setText("WHEAT CROPS");
         }
         else{
-            fieldNumberTextView.setText("FIELD NUMBER TWO");
+            fieldNumberTextView.setText("FIELD 2");
             cropTypeTextView.setText("RICE CROPS");
         }
         backImageView.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +130,6 @@ public class listView extends AppCompatActivity {
             setValue("value2", value2);
             setValue("value3", value3);
         }
-
-
     }
 
     private int getNumOfSensors(ArrayList< ArrayList<SensorData>> sensorsData){
@@ -159,15 +165,24 @@ public class listView extends AppCompatActivity {
                     if (entry.getDeviceID() < 10)
                         IDs[num] = "0" + Integer.toString(entry.getDeviceID());
                     else IDs[num] = Integer.toString(entry.getDeviceID());
-                    if (entry.getTemperature() < 10)
+                    if (entry.getTemperature() < 10) {
                         temps[num] = "0" + Double.toString(entry.getTemperature());
-                    else temps[num] = Double.toString(entry.getTemperature());
-                    if (entry.getpH() < 10)
+                    }
+                    else{
+                        temps[num] = Double.toString(entry.getTemperature());
+                    }
+                    if (entry.getpH() < 10) {
                         pHs[num] = "0" + Double.toString(entry.getpH());
-                    else pHs[num] = Double.toString(entry.getpH());
-                    if (entry.getSoilMoisture() < 10)
+                    }
+                    else{
+                        pHs[num] = Double.toString(entry.getpH());
+                    }
+                    if (entry.getSoilMoisture() < 10) {
                         soil[num] = "0" + Double.toString(entry.getSoilMoisture());
-                    else soil[num] = Double.toString(entry.getSoilMoisture());
+                    }
+                    else{
+                        soil[num] = Double.toString(entry.getSoilMoisture());
+                    }
                     dates[num] = entry.getTime();
                     num++;
                 }
@@ -178,8 +193,6 @@ public class listView extends AppCompatActivity {
     }
 
     private void drawGraph(){
-
-
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
         Cartesian cartesian = AnyChart.line();
 
@@ -264,6 +277,7 @@ public class listView extends AppCompatActivity {
 
         anyChartView.setChart(cartesian);
     }
+
 
 
     private String[] getTimes(String[] dates) throws ParseException {

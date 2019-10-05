@@ -111,7 +111,7 @@
     </LinearLayout>
 
 
-    <ImageView
+    ImageView
         android:id="@+id/soilMoistureImageView"
         android:layout_width="307dp"
         android:layout_height="161dp"
@@ -120,26 +120,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/soil_moisture" />
-
-    <ImageView
-        android:id="@+id/tempImageView"
-        android:layout_width="283dp"
-        android:layout_height="162dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="316dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/temperature" />
-
-    <ImageView
-        android:id="@+id/phImageView"
-        android:layout_width="241dp"
-        android:layout_height="162dp"
-        android:layout_marginStart="184dp"
-        android:layout_marginBottom="316dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ph" />
 
     <ImageView
         android:id="@+id/fieldImageView"
@@ -230,5 +210,118 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fieldImageView" />
+
+    <ImageView
+        android:id="@+id/analyticsBackgroundImageView"
+        android:layout_width="382dp"
+        android:layout_height="203dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="324dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorWhite"
+        android:elevation="2sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_white" />
+
+    <TextView
+        android:id="@+id/analyticsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:elevation="3sp"
+        android:text="MOST RECENT READINGS"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="9sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/analyticsBackgroundImageView" />
+
+    <TextView
+        android:id="@+id/phTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3sp"
+        android:text="PH"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/soilTextView"
+        app:layout_constraintStart_toEndOf="@+id/tempTextView"
+        app:layout_constraintTop_toTopOf="@+id/tempTextView" />
+
+    <TextView
+        android:id="@+id/tempTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:elevation="3sp"
+        android:text="TEMPERATURE"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintTop_toBottomOf="@+id/analyticsTextView" />
+
+    <TextView
+        android:id="@+id/soilTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="SOIL MOISTURE"
+        android:elevation="3sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintTop_toTopOf="@+id/phTextView" />
+
+    <TextView
+        android:id="@+id/tempReadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:elevation="3sp"
+        android:text="19°"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintEnd_toEndOf="@+id/tempTextView"
+        app:layout_constraintStart_toStartOf="@+id/tempTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tempTextView"
+        app:layout_constraintVertical_bias="0.634" />
+
+    <TextView
+        android:id="@+id/pHReadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3sp"
+        android:text="6"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintEnd_toEndOf="@+id/phTextView"
+        app:layout_constraintStart_toStartOf="@+id/phTextView"
+        app:layout_constraintTop_toBottomOf="@+id/phTextView"
+        app:layout_constraintVertical_bias="0.407" />
+
+    <TextView
+        android:id="@+id/soilReadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3sp"
+        android:text="5"
+        android:textColor="@color/colorRed"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintEnd_toEndOf="@+id/soilTextView"
+        app:layout_constraintStart_toStartOf="@+id/soilTextView"
+        app:layout_constraintTop_toBottomOf="@+id/soilTextView"
+        app:layout_constraintVertical_bias="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
