@@ -181,6 +181,7 @@ public class RobotFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
+                commandTextView.setText("Connecting...");
                 robot.initServer();
                 return "True";
             } catch (Exception e) {
@@ -192,8 +193,7 @@ public class RobotFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             if (result.equals("True")) {
-                System.out.println("server initialized succesfully");
-                commandTextView.setText("send command");
+                commandTextView.setText("Connected");
             } else {
                 commandTextView.setText("Unable to initialize server command");
             }
