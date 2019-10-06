@@ -113,7 +113,7 @@
         android:id="@+id/logoImageView"
         android:layout_width="161dp"
         android:layout_height="395dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toTopOf="@+id/forwardImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

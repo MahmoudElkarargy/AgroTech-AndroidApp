@@ -19,6 +19,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+
 import agrotechapp.IBM.MainActivity;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
@@ -35,6 +40,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        updateTime();
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
         if (fieldOne != null) {
@@ -148,4 +155,26 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     public int getFieldNumber() {
         return fieldNumber;
     }
+
+    public void updateTime(){
+        TextView timeTextView = (TextView) root.findViewById(R.id.timeTextView);
+        ImageView timeImageView = (ImageView) root.findViewById(R.id.timeImageView);
+        Date currentTime = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        DateFormat dateFormatDouble = new SimpleDateFormat("hh.mm");
+        String strTime = dateFormat.format(currentTime);
+        String mappedTime = dateFormatDouble.format(currentTime);
+        double currentTimeDouble = Double.valueOf(mappedTime);
+        if(Math.round(currentTimeDouble) > 6){
+            timeImageView.setImageResource(R.drawable.time_night);
+            timeTextView.setTextColor(getResources().getColor(R.color.colorWhite));
+            timeTextView.setText(strTime);
+        }else{
+            timeImageView.setImageResource(R.drawable.time);
+            timeTextView.setTextColor(getResources().getColor(R.color.colorDarkGrey));
+            timeTextView.setText(strTime);
+        }
+
+    }
+
 }

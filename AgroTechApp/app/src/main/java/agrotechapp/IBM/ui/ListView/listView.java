@@ -135,21 +135,21 @@ public class listView extends AppCompatActivity {
         for(String st: temps){
             if(Double.valueOf(st) > user.getTempMax() && !sendEmail){
                 sendEmail = true;
-                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+//                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
             }
         }
 
         for(String st: soil){
             if(Double.valueOf(st) > user.getSoilMax() && !sendEmail){
                 sendEmail = true;
-                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+//                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
             }
         }
 
         for(String st: pHs){
             if(Double.valueOf(st) > user.getpHMax() && !sendEmail){
                 sendEmail = true;
-                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+//                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
             }
         }
 
@@ -325,5 +325,4 @@ public class listView extends AppCompatActivity {
         time = Arrays.stream(timeDouble).mapToObj(String::valueOf).toArray(String[]::new);
         return time;
     }
-
 }
