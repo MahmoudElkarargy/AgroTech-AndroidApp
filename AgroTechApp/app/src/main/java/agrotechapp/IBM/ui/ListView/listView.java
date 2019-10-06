@@ -40,6 +40,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -65,6 +67,7 @@ public class listView extends AppCompatActivity {
     String[] pHs;
     String[] soil;
     String[] dates;
+    String tempString;
     int numberOfSelectedField=0;
     private Date dateTimes;
     private String[] time;
@@ -215,13 +218,57 @@ public class listView extends AppCompatActivity {
                     else{
                         soil[num] = Double.toString(entry.getSoilMoisture());
                     }
+//                    Log.d("myTag","Date: "+soil[num]);
                     dates[num] = entry.getTime();
+//                    Log.d("myTag","Date: "+dates[num]);
                     num++;
                 }
                 else continue;
             }
         }
+        for(int i=0; i<numberOfSelectedField-1; i++) {
+            for (int j = 0; j < numberOfSelectedField - i - 1; j++) {
+//                Log.d("myTag", "R: " + compare(dates[i], dates[i + 1]));
+                if (compare(dates[j], dates[j + 1]) < 0) {
+                    tempString = temps[j];
+                    temps[j] = temps[j+1];
+                    temps[j+1] = tempString;
 
+                    tempString = dates[j];
+                    dates[j] = dates[j+1];
+                    dates[j+1] = tempString;
+
+                    tempString = pHs[j];
+                    pHs[j] = pHs[j+1];
+                    pHs[j+1] = tempString;
+
+                    tempString = soil[j];
+                    soil[j] = soil[j+1];
+                    soil[j+1] = tempString;
+
+                }
+            }
+        }
+
+//        for(int i=0; i<numberOfSelectedField; i++) {
+//            Log.d("myTag", "R after: " + dates[i]);
+//            Log.d("myTag", "S after: " + soil[i]);
+//        }
+    }
+
+    public int compare(String arg0, String arg1) {
+        SimpleDateFormat format = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss");
+        int compareResult = 0;
+        try {
+            Date arg0Date = format.parse(arg0);
+            Date arg1Date = format.parse(arg1);
+            compareResult = arg0Date.compareTo(arg1Date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            compareResult = arg0.compareTo(arg1);
+        }
+        return compareResult;
     }
 
     private void drawGraph(){
