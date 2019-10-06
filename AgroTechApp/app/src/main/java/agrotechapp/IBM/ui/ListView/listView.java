@@ -75,7 +75,6 @@ public class listView extends AppCompatActivity {
     String fromPassword = "AgroTech2019";
     User user = User.getInstance();
     String toEmail = user.getEmail();
-//    String toEmail = "abdallaelshikh96@gmail.com";
     List<String> toEmailList = Arrays.asList(toEmail
             .split("\\s*,\\s*"));
     String emailSubject = "AgroTech";
@@ -328,4 +327,3 @@ public class listView extends AppCompatActivity {
     }
 
 }
-
