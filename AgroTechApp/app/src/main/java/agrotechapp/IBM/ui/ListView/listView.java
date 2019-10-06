@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -43,6 +44,7 @@ import java.util.Date;
 import java.util.List;
 
 import agrotechapp.IBM.Dashboard;
+import agrotechapp.IBM.Logic.SendMailTask;
 import agrotechapp.IBM.Logic.SensorData;
 import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
@@ -85,6 +87,14 @@ public class listView extends AppCompatActivity {
         //parsing sensors data;
         parseSensorData(sensorsData);
         drawGraph();
+        String fromEmail = "agrotech.precision.agriculture@gmai.com";
+        String fromPassword = "AgroTech2019";
+//    String toEmail = user.getEmail();
+        String toEmail = "abdallaelshikh96@gmail.com";
+        List<String> toEmailList = Arrays.asList(toEmail
+                .split("\\s*,\\s*"));
+        String emailSubject = "AgroTech";
+        String emailBody = "WARNING! check your field readings!";
 
 
 //        Log.d("myTag","nbof Selected: "+numberOfSelectedField);
@@ -119,6 +129,8 @@ public class listView extends AppCompatActivity {
                 startActivity(goBackIntent);
             }
         });
+
+//        new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
 
 
     }

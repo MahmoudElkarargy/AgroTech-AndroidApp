@@ -138,6 +138,7 @@
         android:layout_marginBottom="12dp"
         android:elevation="3sp"
         android:text="FIELD 1"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/mapBackgroundImageView"

@@ -237,7 +237,7 @@
         android:textColor="@color/colorDarkGrey"
         android:textSize="9sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/analyticsBackgroundImageView" />
 
@@ -250,6 +250,7 @@
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/soilTextView"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toEndOf="@+id/tempTextView"
         app:layout_constraintTop_toTopOf="@+id/tempTextView" />
 
@@ -279,20 +280,36 @@
         app:layout_constraintTop_toTopOf="@+id/phTextView" />
 
     <TextView
+        android:id="@+id/soilReadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3sp"
+        android:text="5"
+        android:textColor="@color/colorRed"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintEnd_toEndOf="@+id/soilTextView"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/soilTextView"
+        app:layout_constraintTop_toBottomOf="@+id/soilTextView"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <TextView
         android:id="@+id/tempReadingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:elevation="3sp"
         android:text="19°"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="50sp"
+        android:textColor="@color/colorLightBlue"
+        android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintBottom_toBottomOf="@+id/pHReadingTextView"
         app:layout_constraintEnd_toEndOf="@+id/tempTextView"
+        app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="@+id/tempTextView"
         app:layout_constraintTop_toBottomOf="@+id/tempTextView"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/pHReadingTextView"
@@ -300,28 +317,54 @@
         android:layout_height="wrap_content"
         android:elevation="3sp"
         android:text="6"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="50sp"
+        android:textColor="@color/colorLightBlue"
+        android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
         app:layout_constraintEnd_toEndOf="@+id/phTextView"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/phTextView"
         app:layout_constraintTop_toBottomOf="@+id/phTextView"
-        app:layout_constraintVertical_bias="0.407" />
+        app:layout_constraintVertical_bias="0.666" />
 
-    <TextView
-        android:id="@+id/soilReadingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="3sp"
-        android:text="5"
-        android:textColor="@color/colorRed"
-        android:textSize="50sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/horizontalSplitterImageView"
+        android:layout_width="382sp"
+        android:layout_height="4dp"
+        android:background="@color/colorLightGreen"
+        android:elevation="2sp"
+        app:layout_constraintBottom_toTopOf="@+id/pHReadingTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phTextView"
+        app:srcCompat="@drawable/bg_white" />
+
+    <ImageView
+        android:id="@+id/vericalTempSplitterImageView"
+        android:layout_width="113sp"
+        android:layout_height="5dp"
+        android:background="@color/colorLightGreen"
+        android:elevation="2sp"
+        android:rotation="90"
         app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
-        app:layout_constraintEnd_toEndOf="@+id/soilTextView"
-        app:layout_constraintStart_toStartOf="@+id/soilTextView"
-        app:layout_constraintTop_toBottomOf="@+id/soilTextView"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintEnd_toEndOf="@+id/pHReadingTextView"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toStartOf="@+id/tempReadingTextView"
+        app:layout_constraintTop_toTopOf="@+id/horizontalSplitterImageView"
+        app:srcCompat="@drawable/bg_white" />
+
+    <ImageView
+        android:id="@+id/vericalPHSplitterImageView"
+        android:layout_width="113sp"
+        android:layout_height="5dp"
+        android:background="@color/colorLightGreen"
+        android:elevation="2sp"
+        android:rotation="90"
+        app:layout_constraintBottom_toBottomOf="@+id/analyticsBackgroundImageView"
+        app:layout_constraintEnd_toStartOf="@+id/soilReadingTextView"
+        app:layout_constraintStart_toEndOf="@+id/pHReadingTextView"
+        app:layout_constraintTop_toTopOf="@+id/horizontalSplitterImageView"
+        app:srcCompat="@drawable/bg_white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

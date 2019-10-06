@@ -27,6 +27,9 @@ public class ItemAdapter extends BaseAdapter {
     LayoutInflater mInflator;
     User user;
     HomeFragment homeFragment;
+    private boolean isTempCritical = false;
+    private boolean isSoilCritical = false;
+    private boolean ispHCritical = false;
 
     public ItemAdapter(Context c, String[] ids, String[] temps,String[] pH,String[] soil, String[] date, int numberOfSensorData){
         this.IDs = ids;
@@ -53,13 +56,19 @@ public class ItemAdapter extends BaseAdapter {
         return i;
     }
 
+    public boolean[] getReadingStatus(){
+        boolean[] status = new boolean[3];
+        status[0] = isTempCritical;
+        status[1] = ispHCritical;
+        status[2] = isSoilCritical;
+        return status;
+    }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         homeFragment = new HomeFragment();
         user = User.getInstance();
         View v = mInflator.inflate(R.layout.my_listview_details,null);
-
 
 
             String id = IDs[i];
@@ -86,21 +95,35 @@ public class ItemAdapter extends BaseAdapter {
 
                 idTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
 
-                if (Double.valueOf(pH) > user.getpHMax() || Double.valueOf(pH) < user.getpHMin())
+                if (Double.valueOf(pH) > user.getpHMax() || Double.valueOf(pH) < user.getpHMin()) {
                     pHTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+                    ispHCritical = true;
+                }
                 else
+                {
                     pHTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+                }
 
 
                 if (Double.valueOf(temp) > user.getTempMax() || Double.valueOf(temp) < user.getTempMin())
+                {
                     tempTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+                    isTempCritical = true;
+                }
                 else
+                {
                     tempTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+                }
 
                 if (Double.valueOf(soil) > user.getSoilMax() || Double.valueOf(soil) < user.getSoilMin())
+                {
                     soilTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
+                    isSoilCritical = true;
+                }
                 else
+                {
                     soilTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
+                }
 
                 dateTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
 
@@ -110,10 +133,6 @@ public class ItemAdapter extends BaseAdapter {
                 soilTextView.setText(soil);
                 dateTextView.setText(date);
             }
-
-
-
-
         return v;
     }
 }
