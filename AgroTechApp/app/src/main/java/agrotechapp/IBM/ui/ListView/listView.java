@@ -71,12 +71,22 @@ public class listView extends AppCompatActivity {
     int numberOfSensorData=0;
     HomeFragment homeFragment = new HomeFragment();
 
+    String fromEmail = "agrotech.customers@gmail.com";
+    String fromPassword = "AgroTech2019";
+    User user = User.getInstance();
+    String toEmail = user.getEmail();
+//    String toEmail = "abdallaelshikh96@gmail.com";
+    List<String> toEmailList = Arrays.asList(toEmail
+            .split("\\s*,\\s*"));
+    String emailSubject = "AgroTech";
+    String emailBody = "WARNING! check your field readings!";
+    boolean sendEmail = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
-        User user = User.getInstance();
         ArrayList< ArrayList<SensorData>> sensorsData = new ArrayList<ArrayList<SensorData>>();
         sensorsData = user.getSensorsData();
 
@@ -87,14 +97,7 @@ public class listView extends AppCompatActivity {
         //parsing sensors data;
         parseSensorData(sensorsData);
         drawGraph();
-        String fromEmail = "agrotech.precision.agriculture@gmai.com";
-        String fromPassword = "AgroTech2019";
-//    String toEmail = user.getEmail();
-        String toEmail = "abdallaelshikh96@gmail.com";
-        List<String> toEmailList = Arrays.asList(toEmail
-                .split("\\s*,\\s*"));
-        String emailSubject = "AgroTech";
-        String emailBody = "WARNING! check your field readings!";
+
 
 
 //        Log.d("myTag","nbof Selected: "+numberOfSelectedField);
@@ -130,8 +133,26 @@ public class listView extends AppCompatActivity {
             }
         });
 
-//        new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+        for(String st: temps){
+            if(Double.valueOf(st) > user.getTempMax() && !sendEmail){
+                sendEmail = true;
+                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+            }
+        }
 
+        for(String st: soil){
+            if(Double.valueOf(st) > user.getSoilMax() && !sendEmail){
+                sendEmail = true;
+                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+            }
+        }
+
+        for(String st: pHs){
+            if(Double.valueOf(st) > user.getpHMax() && !sendEmail){
+                sendEmail = true;
+                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+            }
+        }
 
     }
 
@@ -305,5 +326,6 @@ public class listView extends AppCompatActivity {
         time = Arrays.stream(timeDouble).mapToObj(String::valueOf).toArray(String[]::new);
         return time;
     }
+
 }
 

@@ -1,23 +1,23 @@
 package agrotechapp.IBM.ui.ListView;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.zip.Inflater;
+import java.util.Arrays;
+import java.util.List;
 
-import agrotechapp.IBM.Logic.SensorData;
+import agrotechapp.IBM.Logic.SendMailTask;
 import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.home.HomeFragment;
 
-public class ItemAdapter extends BaseAdapter {
+public class ItemAdapter extends BaseAdapter{
     String[] IDs;
     String[] temps;
     String[] pHs;
@@ -27,9 +27,7 @@ public class ItemAdapter extends BaseAdapter {
     LayoutInflater mInflator;
     User user;
     HomeFragment homeFragment;
-    private boolean isTempCritical = false;
-    private boolean isSoilCritical = false;
-    private boolean ispHCritical = false;
+
 
     public ItemAdapter(Context c, String[] ids, String[] temps,String[] pH,String[] soil, String[] date, int numberOfSensorData){
         this.IDs = ids;
@@ -56,20 +54,12 @@ public class ItemAdapter extends BaseAdapter {
         return i;
     }
 
-    public boolean[] getReadingStatus(){
-        boolean[] status = new boolean[3];
-        status[0] = isTempCritical;
-        status[1] = ispHCritical;
-        status[2] = isSoilCritical;
-        return status;
-    }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         homeFragment = new HomeFragment();
         user = User.getInstance();
         View v = mInflator.inflate(R.layout.my_listview_details,null);
-
 
             String id = IDs[i];
             String temp = temps[i];
@@ -97,7 +87,6 @@ public class ItemAdapter extends BaseAdapter {
 
                 if (Double.valueOf(pH) > user.getpHMax() || Double.valueOf(pH) < user.getpHMin()) {
                     pHTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
-                    ispHCritical = true;
                 }
                 else
                 {
@@ -108,7 +97,6 @@ public class ItemAdapter extends BaseAdapter {
                 if (Double.valueOf(temp) > user.getTempMax() || Double.valueOf(temp) < user.getTempMin())
                 {
                     tempTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
-                    isTempCritical = true;
                 }
                 else
                 {
@@ -118,7 +106,6 @@ public class ItemAdapter extends BaseAdapter {
                 if (Double.valueOf(soil) > user.getSoilMax() || Double.valueOf(soil) < user.getSoilMin())
                 {
                     soilTextView.setTextColor(v.getResources().getColor(R.color.colorRed));
-                    isSoilCritical = true;
                 }
                 else
                 {
@@ -135,4 +122,5 @@ public class ItemAdapter extends BaseAdapter {
             }
         return v;
     }
+
 }
