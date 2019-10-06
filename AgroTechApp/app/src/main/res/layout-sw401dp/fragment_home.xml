@@ -7,56 +7,30 @@
     android:background="@color/colorLightGreen">
 
     <ImageView
-        android:id="@+id/tempImageView"
-        android:layout_width="283dp"
-        android:layout_height="162dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginBottom="220dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/temperature" />
-
-    <TextView
-        android:id="@+id/tempTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="300dp"
-        android:text="29°C"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.293"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
         android:id="@+id/phImageView"
         android:layout_width="241dp"
         android:layout_height="162dp"
-        android:layout_marginStart="196dp"
-        android:layout_marginBottom="220dp"
+        android:layout_marginBottom="204dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/timeImageView"
         app:srcCompat="@drawable/ph" />
 
-    <TextView
-        android:id="@+id/pHTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginBottom="300dp"
-        android:text="5.13"
-        android:textSize="25sp"
+    <ImageView
+        android:id="@+id/tempImageView"
+        android:layout_width="283dp"
+        android:layout_height="162dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="204dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.698"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:srcCompat="@drawable/temperature" />
 
     <ImageView
         android:id="@+id/timeImageView"
         android:layout_width="241dp"
         android:layout_height="162dp"
-        android:layout_marginStart="196dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/time_night" />
@@ -66,21 +40,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginBottom="168dp"
         android:text="05:35"
         android:textColor="@color/colorWhite"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.732"
+        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/pHTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="284dp"
+        android:text="5.13"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/soilMoistureImageView"
         android:layout_width="307dp"
         android:layout_height="161dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/soil_moisture" />
@@ -89,14 +76,24 @@
         android:id="@+id/soilMoistureTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginBottom="184dp"
         android:fontFamily="monospace"
         android:text="9%"
         android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/timeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tempTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="284dp"
+        android:text="29°C"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -115,60 +112,31 @@
 
     <ImageView
         android:id="@+id/invisibleMap"
-        android:layout_width="380dp"
+        android:layout_width="390sp"
         android:layout_height="247dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/invisiblemap" />
 
     <ImageView
         android:id="@+id/fieldOne"
-        android:layout_width="380dp"
+        android:layout_width="390sp"
         android:layout_height="247dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
         android:elevation="3sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fieldone" />
-
-    <ImageView
-        android:id="@+id/mapBackgroundImageView"
-        android:layout_width="380dp"
-        android:layout_height="339dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/colorWhite"
-        android:elevation="2sp"
-        app:layout_constraintBottom_toTopOf="@+id/phImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_white" />
-
-    <TextView
-        android:id="@+id/fieldNumTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="8dp"
-        android:elevation="3sp"
-        android:text="FIELD 1"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/mapBackgroundImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/fieldsViewTextView"
@@ -185,7 +153,40 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mapBackgroundImageView"
-        app:layout_constraintVertical_bias="0.548" />
+        app:layout_constraintVertical_bias="0.451" />
+
+    <ImageView
+        android:id="@+id/mapBackgroundImageView"
+        android:layout_width="390sp"
+        android:layout_height="339dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorWhite"
+        android:elevation="2sp"
+        app:layout_constraintBottom_toTopOf="@+id/phImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/bg_white" />
+
+    <TextView
+        android:id="@+id/fieldNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="3sp"
+        android:text="FIELD 1"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/mapBackgroundImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
