@@ -23,6 +23,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import agrotechapp.IBM.MainActivity;
 import agrotechapp.IBM.R;
@@ -159,22 +160,17 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     public void updateTime(){
         TextView timeTextView = (TextView) root.findViewById(R.id.timeTextView);
         ImageView timeImageView = (ImageView) root.findViewById(R.id.timeImageView);
-        Date currentTime = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
-        DateFormat dateFormatDouble = new SimpleDateFormat("hh.mm");
-        String strTime = dateFormat.format(currentTime);
-        String mappedTime = dateFormatDouble.format(currentTime);
-        double currentTimeDouble = Double.valueOf(mappedTime);
-        if(Math.round(currentTimeDouble) > 6){
-            timeImageView.setImageResource(R.drawable.time_night);
-            timeTextView.setTextColor(getResources().getColor(R.color.colorWhite));
-            timeTextView.setText(strTime);
-        }else{
+        Calendar c1 = GregorianCalendar.getInstance();
+        int hour = c1.get(Calendar.HOUR_OF_DAY);
+        int minutes = c1.get(Calendar.MINUTE);
+        if(hour > 6 && hour < 18){
             timeImageView.setImageResource(R.drawable.time);
             timeTextView.setTextColor(getResources().getColor(R.color.colorDarkGrey));
-            timeTextView.setText(strTime);
+        }else{
+            timeImageView.setImageResource(R.drawable.time_night);
+            timeTextView.setTextColor(getResources().getColor(R.color.colorWhite));
         }
-
+        timeTextView.setText(String.valueOf(hour) + ":" + String.valueOf(minutes));
     }
 
 }

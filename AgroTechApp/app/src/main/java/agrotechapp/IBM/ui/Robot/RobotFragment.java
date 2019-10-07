@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -58,6 +59,7 @@ public class RobotFragment extends Fragment {
         ImageView backImageView = (ImageView) root.findViewById(R.id.backImageView);
         EditText speedEditText = (EditText) root.findViewById(R.id.speedEditText);
         Switch manualSwitch = (Switch) root.findViewById(R.id.manualSwitch);
+        Button stopButton = (Button) root.findViewById(R.id.stopButton);
         commandTextView = (TextView) root.findViewById(R.id.commandTextView);
 
         manualSwitch.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +70,13 @@ public class RobotFragment extends Fragment {
         });
 
         new initServer().execute();
+
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new sendCommand().execute("manual", "S", speedEditText.getText().toString());
+            }
+        });
 
 
         forwardImageView.setOnTouchListener(new View.OnTouchListener() {
