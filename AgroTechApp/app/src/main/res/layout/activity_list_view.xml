@@ -9,33 +9,30 @@
 
     <ListView
         android:id="@+id/myList"
-        android:layout_width="370sp"
+        android:layout_width="365sp"
         android:layout_height="176dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
         android:background="@color/colorWhite"
         android:divider="@color/colorLightGreen"
         android:dividerHeight="10sp"
         android:paddingTop="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.481">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
     </ListView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="421dp"
-        android:layout_height="36dp"
+        android:layout_width="423dp"
+        android:layout_height="26dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="196dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,31 +137,29 @@
         android:id="@+id/fieldNumTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginStart="16dp"
         android:text="FIELD NUMBER"
         android:textColor="@color/colorRed"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/graphImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/fieldImageView"
+        app:layout_constraintEnd_toEndOf="@+id/fieldImageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/fieldImageView"
+        app:layout_constraintTop_toTopOf="@+id/fieldImageView" />
 
     <TextView
         android:id="@+id/cropTypeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
         android:text="Crop type"
         android:textColor="@color/colorDarkGrey"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/fieldImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/fieldNumTextView"
+        app:layout_constraintEnd_toEndOf="@+id/fieldImageView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/fieldNumTextView"
+        app:layout_constraintTop_toTopOf="@+id/fieldNumTextView" />
 
     <ImageView
         android:id="@+id/graphImageView"
@@ -204,14 +199,15 @@
 
     <ImageView
         android:id="@+id/mostRecentImgaeView"
-        android:layout_width="370sp"
-        android:layout_height="199dp"
+        android:layout_width="365sp"
+        android:layout_height="182dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graphImageView"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/most_recent_readings_bg" />
 
     <TextView
@@ -263,7 +259,7 @@
 
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"
-        android:layout_width="360sp"
+        android:layout_width="340sp"
         android:layout_height="156dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"

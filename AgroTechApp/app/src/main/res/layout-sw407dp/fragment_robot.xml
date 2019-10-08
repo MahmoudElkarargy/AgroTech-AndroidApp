@@ -111,12 +111,26 @@
 
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="161dp"
-        android:layout_height="395dp"
-        android:layout_marginBottom="120dp"
-        app:layout_constraintBottom_toTopOf="@+id/forwardImageView"
+        android:layout_width="167dp"
+        android:layout_height="119dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/manualSwitch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_black" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

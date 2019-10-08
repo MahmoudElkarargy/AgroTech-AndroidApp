@@ -170,7 +170,12 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             timeImageView.setImageResource(R.drawable.time_night);
             timeTextView.setTextColor(getResources().getColor(R.color.colorWhite));
         }
-        timeTextView.setText(String.valueOf(hour) + ":" + String.valueOf(minutes));
+        if(minutes < 9){
+            String mins = "0" + String.valueOf(minutes);
+            timeTextView.setText(String.valueOf(hour) + ":" + mins);
+        }else{
+            timeTextView.setText(String.valueOf(hour) + ":" + String.valueOf(minutes));
+        }
     }
 
 }
