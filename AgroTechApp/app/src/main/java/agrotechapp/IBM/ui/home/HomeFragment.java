@@ -209,11 +209,12 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     }
 
     public void updateDashboard() {
-        Log.d("myTag", "listView Object: " + listview);
-        Log.d("myTag", "k: " + listview.getSensorData());
-        listview.parseSensorData(listview.getSensorData());
-        Log.d("myTag", "User Object: " + user);
-        Log.d("myTag", "User: " + user.getTempMax());
+//        Log.d("myTag", "listView Object: " + listview);
+//        Log.d("myTag", "k: " + user.getSensorsData());
+        user = User.getInstance();
+        listview.parseSensorData(user.getSensorsData());
+//        Log.d("myTag", "User Object: " + user);
+//        Log.d("myTag", "User: " + user.getTempMax());
         Activity activity = getActivity();
         if (isAdded() && activity != null) {
 
@@ -240,10 +241,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             }
 
 
-            tempTextView.setText(listview.getLastTemp());
-            soilMoistureTextView.setText(listview.getLastSoil());
-            pHTextView.setText(listview.getLastpH());
-            Log.d("myTag", "sub: " + fieldNumTextView.getText().length());
+//            Log.d("myTag", "sub: " + fieldNumTextView.getText().length());
             if (isThereWarning) {
                 fieldNumTextView.setTextColor(getResources().getColor(R.color.colorRed));
                 if (fieldNumTextView.getText().length() < 8)
@@ -251,5 +249,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             } else
                 fieldNumTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
         }
+//        Log.d("myTag","listview.getLastTemp(): "+listview.getLastTemp());
+        tempTextView.setText(listview.getLastTemp());
+        soilMoistureTextView.setText(listview.getLastSoil());
+        pHTextView.setText(listview.getLastpH());
     }
 }

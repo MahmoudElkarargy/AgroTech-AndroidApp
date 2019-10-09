@@ -175,13 +175,13 @@ public class listView extends AppCompatActivity {
         return num;
     }
     public ArrayList<ArrayList<SensorData>> getSensorData(){
-        return sensorsData;
+        return user.getSensorsData();
     }
 
     public void parseSensorData(ArrayList<ArrayList<SensorData>> sensorsData){
         int num = 0;
         numberOfSelectedField=0;
-//        Log.d("myTag","I selected: "+homeFragment.getFieldNumber());
+        Log.d("myTag","I selected: "+homeFragment.getFieldNumber());
         for(ArrayList<SensorData> s : sensorsData) {
             for (SensorData entry : s) {
                 if (entry.getDeviceID() == homeFragment.getFieldNumber()) {
@@ -249,11 +249,9 @@ public class listView extends AppCompatActivity {
                 }
             }
         }
-
-//        for(int i=0; i<numberOfSelectedField; i++) {
-//            Log.d("myTag", "R after: " + dates[i]);
-//            Log.d("myTag", "S after: " + soil[i]);
-//        }
+//        Log.d("myTag","last temp: "+temps[0]);
+        user = User.getInstance();
+//        Log.d("myTag","nb: "+getNumOfSensors(user.getSensorsData()));
     }
 
     public int compare(String arg0, String arg1) {
