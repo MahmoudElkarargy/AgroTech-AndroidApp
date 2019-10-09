@@ -83,21 +83,26 @@ public class listView extends AppCompatActivity {
     String emailSubject = "AgroTech";
     String emailBody = "WARNING! check your field readings!";
     boolean sendEmail = false;
+    static ArrayList< ArrayList<SensorData>> sensorsData;
+    public listView(){
+        sensorsData = new ArrayList<ArrayList<SensorData>>();
+        sensorsData = user.getSensorsData();
+        //parsing sensors data;
+        parseSensorData(sensorsData);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
-        ArrayList< ArrayList<SensorData>> sensorsData = new ArrayList<ArrayList<SensorData>>();
-        sensorsData = user.getSensorsData();
+
 
 
         Resources res = getResources();
         myListView = (ListView) findViewById(R.id.myList);
 
-        //parsing sensors data;
-        parseSensorData(sensorsData);
+
         drawGraph();
 
 
@@ -176,9 +181,13 @@ public class listView extends AppCompatActivity {
         }
         return num;
     }
+    public ArrayList<ArrayList<SensorData>> getSensorData(){
+        return sensorsData;
+    }
 
-    private void parseSensorData(ArrayList<ArrayList<SensorData>> sensorsData){
+    public void parseSensorData(ArrayList<ArrayList<SensorData>> sensorsData){
         int num = 0;
+        numberOfSelectedField=0;
 //        Log.d("myTag","I selected: "+homeFragment.getFieldNumber());
         for(ArrayList<SensorData> s : sensorsData) {
             for (SensorData entry : s) {
@@ -371,5 +380,15 @@ public class listView extends AppCompatActivity {
         Arrays.sort(timeDouble);
         time = Arrays.stream(timeDouble).mapToObj(String::valueOf).toArray(String[]::new);
         return time;
+    }
+
+    public String getLastTemp(){
+        return temps[0];
+    }
+    public String getLastpH(){
+        return pHs[0];
+    }
+    public String getLastSoil(){
+        return soil[0];
     }
 }

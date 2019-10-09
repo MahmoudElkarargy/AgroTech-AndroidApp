@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -33,6 +34,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
     private HomeViewModel homeViewModel;
     View root;
+    TextView tempTextView, pHTextView, soilMoistureTextView;
+    listView listview;
     private static int fieldNumber=1;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,12 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
         updateTime();
+        tempTextView = (TextView) root.findViewById(R.id.tempTextView);
+        soilMoistureTextView = (TextView) root.findViewById(R.id.soilMoistureTextView);
+        pHTextView = (TextView) root.findViewById(R.id.pHTextView);
+
+        listview = new listView();
+        updateDashboard();
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
         if (fieldOne != null) {
@@ -104,13 +113,16 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                     nextImage = R.drawable.fieldtwo;
                     fieldNumTextView.setText("FIELD 2");
                     fieldNumber =2;
-//                    Log.d("myTag","FieldTwooo Clicked");
+                    listview.parseSensorData(listview.getSensorData());
+                    updateDashboard();
                 }
                 else if(ct.closeMatch (Color.GREEN, touchColor, tolerance)){
 //
                     nextImage = R.drawable.fieldone;
                     fieldNumTextView.setText("FIELD 1");
                     fieldNumber =1;
+                    listview.parseSensorData(listview.getSensorData());
+                    updateDashboard();
 //                    Log.d("myTag","FieldOne Clicked");
                 }
 
@@ -178,4 +190,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         }
     }
 
+    private void updateDashboard() {
+        tempTextView.setText(listview.getLastTemp());
+        soilMoistureTextView.setText(listview.getLastSoil());
+        pHTextView.setText(listview.getLastpH());
+    }
 }
