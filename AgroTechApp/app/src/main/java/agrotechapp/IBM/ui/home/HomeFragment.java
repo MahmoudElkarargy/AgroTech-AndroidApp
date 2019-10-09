@@ -1,6 +1,7 @@
 package agrotechapp.IBM.ui.home;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.MainActivity;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
@@ -36,6 +38,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     View root;
     TextView tempTextView, pHTextView, soilMoistureTextView;
     listView listview;
+    User user;
+    TextView fieldNumTextView;
+    private boolean isThereWarning = false;
     private static int fieldNumber=1;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,12 +49,14 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
+         user = User.getInstance();
 
         updateTime();
         tempTextView = (TextView) root.findViewById(R.id.tempTextView);
         soilMoistureTextView = (TextView) root.findViewById(R.id.soilMoistureTextView);
         pHTextView = (TextView) root.findViewById(R.id.pHTextView);
-
+        fieldNumTextView = (TextView)root.findViewById(R.id.fieldNumTextView);
+        fieldNumTextView.setText("FIELD 1");
         listview = new listView();
         updateDashboard();
 
@@ -86,7 +93,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         int nextImage = -1;			// resource id of the next image to display
 
         ImageView fieldone = (ImageView) v.findViewById (R.id.fieldOne);
-        TextView fieldNumTextView = (TextView)root.findViewById(R.id.fieldNumTextView);
         if (fieldone == null) return false;
 
         Integer tagNum = (Integer) fieldone.getTag ();
@@ -112,6 +118,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {
                     nextImage = R.drawable.fieldtwo;
                     fieldNumTextView.setText("FIELD 2");
+                    isThereWarning = false;
                     fieldNumber =2;
                     listview.parseSensorData(listview.getSensorData());
                     updateDashboard();
@@ -120,6 +127,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 //
                     nextImage = R.drawable.fieldone;
                     fieldNumTextView.setText("FIELD 1");
+                    isThereWarning = false;
                     fieldNumber =1;
                     listview.parseSensorData(listview.getSensorData());
                     updateDashboard();
@@ -168,6 +176,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     public int getFieldNumber() {
         return fieldNumber;
     }
+    public void setFieldNumber(int fieldNumber){
+        this.fieldNumber = fieldNumber;
+    }
 
     public void updateTime(){
         TextView timeTextView = (TextView) root.findViewById(R.id.timeTextView);
@@ -191,8 +202,44 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     }
 
     private void updateDashboard() {
+        if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
+            tempTextView.setTextColor(getResources().getColor(R.color.colorRed));
+            isThereWarning = true;
+        }
+        else
+        {
+            tempTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
+
+        if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin())
+        {
+            soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorRed));
+            isThereWarning = true;
+        }
+        else
+        {
+            soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
+        }
+
+        if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin())
+        {
+            pHTextView.setTextColor(getResources().getColor(R.color.colorRed));
+            isThereWarning = true;
+        }
+        else
+        {
+            pHTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
+
         tempTextView.setText(listview.getLastTemp());
         soilMoistureTextView.setText(listview.getLastSoil());
         pHTextView.setText(listview.getLastpH());
+        if(isThereWarning) {
+            fieldNumTextView.setTextColor(getResources().getColor(R.color.colorRed));
+            fieldNumTextView.setText(fieldNumTextView.getText() + " [WARNING]");
+        }
     }
 }

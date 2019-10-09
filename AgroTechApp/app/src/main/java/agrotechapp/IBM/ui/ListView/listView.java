@@ -124,17 +124,11 @@ public class listView extends AppCompatActivity {
             fieldNumberTextView.setText("FIELD 2");
             cropTypeTextView.setText("RICE CROPS");
         }
-        backImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goBackIntent = new Intent(getApplicationContext(), Dashboard.class);
-                startActivity(goBackIntent);
-            }
-        });
-
         backTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                homeFragment.setFieldNumber(1);
+                parseSensorData(sensorsData);
                 Intent goBackIntent = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(goBackIntent);
             }
@@ -227,9 +221,7 @@ public class listView extends AppCompatActivity {
                     else{
                         soil[num] = Double.toString(entry.getSoilMoisture());
                     }
-//                    Log.d("myTag","Date: "+soil[num]);
                     dates[num] = entry.getTime();
-//                    Log.d("myTag","Date: "+dates[num]);
                     num++;
                 }
                 else continue;
