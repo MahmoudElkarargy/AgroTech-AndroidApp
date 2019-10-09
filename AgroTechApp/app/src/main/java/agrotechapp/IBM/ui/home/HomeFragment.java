@@ -241,5 +241,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             fieldNumTextView.setTextColor(getResources().getColor(R.color.colorRed));
             fieldNumTextView.setText(fieldNumTextView.getText() + " [WARNING]");
         }
+        else
+            fieldNumTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
     }
 }
