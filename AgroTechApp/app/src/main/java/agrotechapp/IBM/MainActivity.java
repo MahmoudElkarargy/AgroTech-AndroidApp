@@ -4,15 +4,18 @@ package agrotechapp.IBM;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import agrotechapp.IBM.Logic.*;
+import agrotechapp.IBM.ui.home.HomeFragment;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -38,12 +41,11 @@ public class MainActivity extends AppCompatActivity {
     private String authenticated = "False";
     User user;
     Timer timer = new Timer();
-
+//    static HomeFragment homeFragment = HomeFragment.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         res = getResources();
         signInBtn = (Button) findViewById(R.id.signInBtn);
         signUpTextView = (TextView) findViewById(R.id.signUpTextView);
@@ -141,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
 //                    System.out.println(entry.getDeviceID() + " " + entry.getTime() + " " + entry.getTemperature());
 //                }
 //            }
+            Log.d("myTag","List are updated");
+//            Log.d("myTag","object: "+HomeFragment.getInstance());
+            HomeFragment homeFragment = new HomeFragment();
+            homeFragment.updateDashboard();
         }
     }
 }

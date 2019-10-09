@@ -19,7 +19,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class User {
-	
+
 	private static User instance;
 	public static User getInstance() {
 		return instance;

@@ -1,5 +1,6 @@
 package agrotechapp.IBM.ui.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -33,19 +34,25 @@ import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
 
 public class HomeFragment extends Fragment implements View.OnTouchListener{
+//    private static HomeFragment instance;
+//    public static HomeFragment getInstance() {
+//        return instance;
+//    }
 
     private HomeViewModel homeViewModel;
-    View root;
-    TextView tempTextView, pHTextView, soilMoistureTextView;
-    listView listview;
-    User user;
-    TextView fieldNumTextView;
+    static View root;
+    static TextView tempTextView, pHTextView, soilMoistureTextView;
+    static listView listview;
+    static User user;
+    static TextView fieldNumTextView;
     private boolean isThereWarning = false;
     private static int fieldNumber=1;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
+//        instance = new HomeFragment();
+//        Log.d("myTag","instance?: "+instance);
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -201,47 +208,48 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         }
     }
 
-    private void updateDashboard() {
-        if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
-            tempTextView.setTextColor(getResources().getColor(R.color.colorRed));
-            isThereWarning = true;
-        }
-        else
-        {
-            tempTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        }
+    public void updateDashboard() {
+        Log.d("myTag", "listView Object: " + listview);
+        Log.d("myTag", "k: " + listview.getSensorData());
+        listview.parseSensorData(listview.getSensorData());
+        Log.d("myTag", "User Object: " + user);
+        Log.d("myTag", "User: " + user.getTempMax());
+        Activity activity = getActivity();
+        if (isAdded() && activity != null) {
+
+            if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
+                tempTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                isThereWarning = true;
+            } else {
+                tempTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            }
 
 
-        if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin())
-        {
-            soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorRed));
-            isThereWarning = true;
-        }
-        else
-        {
-            soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin()) {
+                soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                isThereWarning = true;
+            } else {
+                soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            }
 
-        }
-
-        if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin())
-        {
-            pHTextView.setTextColor(getResources().getColor(R.color.colorRed));
-            isThereWarning = true;
-        }
-        else
-        {
-            pHTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        }
+            if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
+                pHTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                isThereWarning = true;
+            } else {
+                pHTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            }
 
 
-        tempTextView.setText(listview.getLastTemp());
-        soilMoistureTextView.setText(listview.getLastSoil());
-        pHTextView.setText(listview.getLastpH());
-        if(isThereWarning) {
-            fieldNumTextView.setTextColor(getResources().getColor(R.color.colorRed));
-            fieldNumTextView.setText(fieldNumTextView.getText() + " [WARNING]");
+            tempTextView.setText(listview.getLastTemp());
+            soilMoistureTextView.setText(listview.getLastSoil());
+            pHTextView.setText(listview.getLastpH());
+            Log.d("myTag", "sub: " + fieldNumTextView.getText().length());
+            if (isThereWarning) {
+                fieldNumTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                if (fieldNumTextView.getText().length() < 8)
+                    fieldNumTextView.setText(fieldNumTextView.getText() + " [WARNING]");
+            } else
+                fieldNumTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
         }
-        else
-            fieldNumTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
     }
 }

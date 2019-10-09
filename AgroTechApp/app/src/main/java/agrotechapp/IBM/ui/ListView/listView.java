@@ -72,6 +72,7 @@ public class listView extends AppCompatActivity {
     private Date dateTimes;
     private String[] time;
     int numberOfSensorData=0;
+//    HomeFragment homeFragment = HomeFragment.getInstance();
     HomeFragment homeFragment = new HomeFragment();
 
     String fromEmail = "agrotech.customers@gmail.com";
@@ -95,7 +96,6 @@ public class listView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-
 
 
 
@@ -133,26 +133,25 @@ public class listView extends AppCompatActivity {
                 startActivity(goBackIntent);
             }
         });
-
-        for(String st: temps){
-            if(Double.valueOf(st) > user.getTempMax() && !sendEmail){
+        Log.d("myTag","Entires: "+temps[0]+" - "+soil[0]+" - "+pHs[0]);
+        if(Double.valueOf(temps[0]) > user.getTempMax() || Double.valueOf(temps[0]) < user.getTempMin()){
                 sendEmail = true;
 //                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-            }
         }
 
-        for(String st: soil){
-            if(Double.valueOf(st) > user.getSoilMax() && !sendEmail){
-                sendEmail = true;
-//                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-            }
+        if(Double.valueOf(soil[0]) > user.getSoilMax() || Double.valueOf(soil[0]) < user.getSoilMin()){
+            sendEmail = true;
+//          new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
 
-        for(String st: pHs){
-            if(Double.valueOf(st) > user.getpHMax() && !sendEmail){
-                sendEmail = true;
-//                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-            }
+        if(Double.valueOf(pHs[0]) > user.getpHMax() || Double.valueOf(pHs[0]) < user.getpHMin()){
+            sendEmail = true;
+//          new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+        }
+        if(sendEmail){
+            Log.d("myTag","Email Sent!!!");
+            sendEmail = false;
+//            new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
 
     }
