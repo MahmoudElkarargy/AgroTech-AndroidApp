@@ -34,10 +34,6 @@ import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
 
 public class HomeFragment extends Fragment implements View.OnTouchListener{
-//    private static HomeFragment instance;
-//    public static HomeFragment getInstance() {
-//        return instance;
-//    }
 
     private HomeViewModel homeViewModel;
     static View root;
@@ -47,12 +43,14 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     static TextView fieldNumTextView;
     private boolean isThereWarning = false;
     private static int fieldNumber=1;
-
+    private static boolean viewDetailsButtonPress = false;
+    private static int counter =0;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
 //        instance = new HomeFragment();
 //        Log.d("myTag","instance?: "+instance);
+        viewDetailsButtonPress = false;
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -86,11 +84,24 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             public void onClick(View v) {
                 Intent bla = new Intent(getContext(),listView.class);
                 startActivity(bla);
+                Log.d("myTag","counter: "+counter);
+                Log.d("myTag","bool: "+listview.getsendEmail());
+
+                if(counter==0 && listview.getsendEmail() || listview.getsendEmail()){
+                    viewDetailsButtonPress = true;
+                    counter++;
+                }
             }
         });
         return root;
     }
 
+    public boolean getViewDetailsButtonPress(){
+        return viewDetailsButtonPress;
+    }
+    public void setviewDetailsButtonPress(boolean viewDetailsButtonPress){
+        this.viewDetailsButtonPress = viewDetailsButtonPress;
+    }
     public boolean onTouch (View v, MotionEvent ev) {
         boolean handledHere = false;
         final int action = ev.getAction();
@@ -207,12 +218,27 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             timeTextView.setText(String.valueOf(hour) + ":" + String.valueOf(minutes));
         }
     }
+    public void setCounter(int counter){
+        this.counter = counter;
+    }
 
     public void updateDashboard() {
 //        Log.d("myTag", "listView Object: " + listview);
 //        Log.d("myTag", "k: " + user.getSensorsData());
+        int number = listview.getNumOfSensors(listview.getSensorData());
         user = User.getInstance();
         listview.parseSensorData(user.getSensorsData());
+
+        Log.d("myTag", "Checking updates: "+number +" = "+listview.getNumOfSensors(user.getSensorsData())+" ??");
+        if(number == listview.getNumOfSensors(user.getSensorsData())){
+            Log.d("myTag","no email to sent");
+            setviewDetailsButtonPress(false);
+        }else {
+            setviewDetailsButtonPress(true);
+            Log.d("myTag","email to sent");
+            counter = 0;
+        }
+
 //        Log.d("myTag", "User Object: " + user);
 //        Log.d("myTag", "User: " + user.getTempMax());
         Activity activity = getActivity();

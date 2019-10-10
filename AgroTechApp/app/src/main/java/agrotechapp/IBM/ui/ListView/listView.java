@@ -84,6 +84,7 @@ public class listView extends AppCompatActivity {
     String emailSubject = "AgroTech";
     String emailBody = "WARNING! check your field readings!";
     boolean sendEmail = false;
+    static boolean emailIsSent = false;
     static ArrayList< ArrayList<SensorData>> sensorsData;
     public listView(){
         sensorsData = new ArrayList<ArrayList<SensorData>>();
@@ -96,7 +97,7 @@ public class listView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        int nbOfList = getNumOfSensors(user.getSensorsData());
+        int nbOfList = getNumOfSensors(getSensorData());
 
 
         Resources res = getResources();
@@ -141,6 +142,7 @@ public class listView extends AppCompatActivity {
 
         if(Double.valueOf(soil[0]) > user.getSoilMax() || Double.valueOf(soil[0]) < user.getSoilMin()){
             sendEmail = true;
+            Log.d("myTag", "tb a true ahy");
 //          new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
 
@@ -149,15 +151,25 @@ public class listView extends AppCompatActivity {
 //          new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
         Log.d("myTag","old nb: "+nbOfList+" new: "+getNumOfSensors(user.getSensorsData()));
-        if(sendEmail && nbOfList==getNumOfSensors(user.getSensorsData())){
+        Log.d("myTag","pressed on view details? "+homeFragment.getViewDetailsButtonPress());
+        if(     (sendEmail && nbOfList!=getNumOfSensors(user.getSensorsData()))     ||
+                (homeFragment.getViewDetailsButtonPress()  && sendEmail)){
+            emailIsSent = true;
             Log.d("myTag","Email Sent!!!");
             sendEmail = false;
             nbOfList = getNumOfSensors(user.getSensorsData());
 //            new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+        }else {
+
+            Log.d("myTag","NOOOO Email Sent!!!");
         }
 
     }
 
+    public boolean getsendEmail(){
+        Log.d("myTag",":::"+emailIsSent);
+        return emailIsSent;
+    }
     private class CustomDataEntry extends ValueDataEntry {
 
         CustomDataEntry(String x, Number value, Number value2, Number value3) {
@@ -167,7 +179,7 @@ public class listView extends AppCompatActivity {
         }
     }
 
-    private int getNumOfSensors(ArrayList< ArrayList<SensorData>> sensorsData){
+    public int getNumOfSensors(ArrayList< ArrayList<SensorData>> sensorsData){
         int num = 0;
         for(ArrayList<SensorData> s : sensorsData) {
             for(SensorData entry : s) {
