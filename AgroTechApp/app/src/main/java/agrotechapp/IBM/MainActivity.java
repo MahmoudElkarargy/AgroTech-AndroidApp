@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 //                    System.out.println(entry.getDeviceID() + " " + entry.getTime() + " " + entry.getTemperature());
 //                }
 //            }
-            Log.d("myTag","List are updated");
+//            Log.d("myTag","List are updated");
 //            Log.d("myTag","object: "+HomeFragment.getInstance());
             HomeFragment homeFragment = new HomeFragment();
             homeFragment.updateDashboard();

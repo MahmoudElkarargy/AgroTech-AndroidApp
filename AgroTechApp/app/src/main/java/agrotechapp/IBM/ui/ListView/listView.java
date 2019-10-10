@@ -96,7 +96,7 @@ public class listView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-
+        int nbOfList = getNumOfSensors(user.getSensorsData());
 
 
         Resources res = getResources();
@@ -148,9 +148,11 @@ public class listView extends AppCompatActivity {
             sendEmail = true;
 //          new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
-        if(sendEmail){
+        Log.d("myTag","old nb: "+nbOfList+" new: "+getNumOfSensors(user.getSensorsData()));
+        if(sendEmail && nbOfList==getNumOfSensors(user.getSensorsData())){
             Log.d("myTag","Email Sent!!!");
             sendEmail = false;
+            nbOfList = getNumOfSensors(user.getSensorsData());
 //            new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
 
@@ -181,7 +183,7 @@ public class listView extends AppCompatActivity {
     public void parseSensorData(ArrayList<ArrayList<SensorData>> sensorsData){
         int num = 0;
         numberOfSelectedField=0;
-        Log.d("myTag","I selected: "+homeFragment.getFieldNumber());
+//        Log.d("myTag","I selected: "+homeFragment.getFieldNumber());
         for(ArrayList<SensorData> s : sensorsData) {
             for (SensorData entry : s) {
                 if (entry.getDeviceID() == homeFragment.getFieldNumber()) {
