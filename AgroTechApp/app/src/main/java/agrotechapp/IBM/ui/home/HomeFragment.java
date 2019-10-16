@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     private static int fieldNumber=1;
     private static boolean viewDetailsButtonPress = false;
     private static int counter =0;
+    private ImageView tempImage, phImage, soilImage;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -63,6 +64,10 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         fieldNumTextView = (TextView)root.findViewById(R.id.fieldNumTextView);
         fieldNumTextView.setText("FIELD 1");
         listview = new listView();
+        tempImage = (ImageView) root.findViewById(R.id.tempImageView);
+        phImage = (ImageView) root.findViewById(R.id.phImageView);
+        soilImage = (ImageView) root.findViewById(R.id.soilMoistureImageView);
+
         updateDashboard();
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
@@ -241,36 +246,35 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
 //        Log.d("myTag", "User Object: " + user);
 //        Log.d("myTag", "User: " + user.getTempMax());
+        Log.d("myTag", ":::" + R.drawable.temperature);
         if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
+//            if(tempImage.getResources() == Re)
+//                tempImage.setImageResource(R.drawable.temperature_warning);
             isThereWarning = true;
         } else {
+//            tempImage.setImageResource(R.drawable.temperature);
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
         }
 
-//        Activity activity = getActivity();
-//        if (isAdded() && activity != null) {
-
-//            if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
-//                tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
-//                isThereWarning = true;
-//            } else {
-//                tempTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
-//            }
 
 
             if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin()) {
                 soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 isThereWarning = true;
+//                soilImage.setImageDrawable(root.getResources().getDrawable(R.drawable.soil_moisture_warning));
             } else {
                 soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
+//                soilImage.setImageDrawable(root.getResources().getDrawable(R.drawable.soil_moisture));
             }
 
             if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
                 pHTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 isThereWarning = true;
+//                phImage.setImageDrawable(root.getResources().getDrawable(R.drawable.ph_warning));
             } else {
                 pHTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
+//                phImage.setImageResource(R.drawable.ph);
             }
 
 
@@ -285,7 +289,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             }
 
 //        Log.d("myTag","listview.getLastTemp(): "+listview.getLastTemp());
-        tempTextView.setText(listview.getLastTemp());
+        Double temp = Double.valueOf(listview.getLastTemp());
+        tempTextView.setText(String.format( "%.2f",temp));
         soilMoistureTextView.setText(listview.getLastSoil());
         pHTextView.setText(listview.getLastpH());
     }
