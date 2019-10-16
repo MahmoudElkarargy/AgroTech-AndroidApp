@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         new getSensorsUpdates().execute();
                     }
-                },  30*1000, 30*1000);
+                },  3*1000, 3*1000);
 
             }else{
                 userValidationTextView.setText("Invalid Username or Password");

@@ -241,40 +241,49 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
 //        Log.d("myTag", "User Object: " + user);
 //        Log.d("myTag", "User: " + user.getTempMax());
-        Activity activity = getActivity();
-        if (isAdded() && activity != null) {
+        if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
+            tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
+            isThereWarning = true;
+        } else {
+            tempTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
+        }
 
-            if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
-                tempTextView.setTextColor(getResources().getColor(R.color.colorRed));
-                isThereWarning = true;
-            } else {
-                tempTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            }
+//        Activity activity = getActivity();
+//        if (isAdded() && activity != null) {
+
+//            if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
+//                tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
+//                isThereWarning = true;
+//            } else {
+//                tempTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
+//            }
 
 
             if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin()) {
-                soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 isThereWarning = true;
             } else {
-                soilMoistureTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
             }
 
             if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
-                pHTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                pHTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 isThereWarning = true;
             } else {
-                pHTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                pHTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
             }
 
 
 //            Log.d("myTag", "sub: " + fieldNumTextView.getText().length());
             if (isThereWarning) {
-                fieldNumTextView.setTextColor(getResources().getColor(R.color.colorRed));
+                fieldNumTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 if (fieldNumTextView.getText().length() < 8)
                     fieldNumTextView.setText(fieldNumTextView.getText() + " [WARNING]");
-            } else
-                fieldNumTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
-        }
+            } else {
+                fieldNumTextView.setTextColor(root.getResources().getColor(R.color.colorPrimary));
+                fieldNumTextView.setText(fieldNumTextView.getText().subSequence(0,7));
+            }
+
 //        Log.d("myTag","listview.getLastTemp(): "+listview.getLastTemp());
         tempTextView.setText(listview.getLastTemp());
         soilMoistureTextView.setText(listview.getLastSoil());
