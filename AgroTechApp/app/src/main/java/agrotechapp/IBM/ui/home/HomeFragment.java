@@ -232,7 +232,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             if (sendEmail) {
                 emailIsSent = true;
                 sendEmail = false;
-//                new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+                new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
               }
         }
         else if(olddatanumbers != newNumbers){
