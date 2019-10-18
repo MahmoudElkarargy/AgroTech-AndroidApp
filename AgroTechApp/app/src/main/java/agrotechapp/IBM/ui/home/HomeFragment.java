@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,6 +42,10 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     static private int olddatanumbers, newNumbers;
     static private Activity activity;
 
+    private static ImageView tempImg;
+    private static ImageView phImg;
+    private static ImageView soilImg;
+
     private String fromEmail = "agrotech.customers@gmail.com";
     private String fromPassword = "AgroTech2019";
 
@@ -68,9 +71,11 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         fieldNumTextView = (TextView)root.findViewById(R.id.fieldNumTextView);
         fieldNumTextView.setText("FIELD 1");
         listview = new listView();
+        tempImg = (ImageView) root.findViewById(R.id.tempImageView);
+        phImg = (ImageView) root.findViewById(R.id.phImageView);
+        soilImg = (ImageView) root.findViewById(R.id.soilMoistureImageView);
 
         olddatanumbers = listview.getNumOfSensors(user.getSensorsData());
-//        Log.d("myTag","number of data: "+olddatanumbers);
         updateDashboard();
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
@@ -212,10 +217,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
         //Email checking..
         newNumbers = listview.getNumOfSensors(user.getSensorsData());
-//        Log.d("myTag", "Now nb is: "+newNumbers);
-        if(activity==null) {
-//            Log.d("myTag", "WHYYYYYY????");
-        }
         if(!emailIsSent) {
             if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
                 sendEmail = true;
@@ -230,48 +231,40 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             }
             if (sendEmail) {
                 emailIsSent = true;
-//                Log.d("myTag", "EMAIL SENT!!");
                 sendEmail = false;
-//                if(activity==null) {
-////                    Activity activity = getActivity();
-//                    Log.d("myTag", "NULLLLLLLLLLLL");
-////                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-////                    Log.d("myTag", "it was null");
-//                }else {
-//                    Log.d("myTag", "EMAIL SENT!!2222");
-                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-//                    Log.d("myTag", "Excuted");
-//                }
-            }
+//                new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+              }
         }
         else if(olddatanumbers != newNumbers){
-//            Log.d("myTag", "added new entiry");
             olddatanumbers = newNumbers;
             emailIsSent = false;
         }
-//        else {
-//            Log.d("myTag", "NOOOOOO Email Sent!!!");
-//        }
 
         if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
+            tempImg.setImageResource(R.drawable.temperature_warning);
             isThereWarning = true;
         } else {
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
+            tempImg.setImageResource(R.drawable.temperature);
         }
 
             if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin()) {
                 soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
+                soilImg.setImageResource(R.drawable.soil_moisture_warning);
                 isThereWarning = true;
             } else {
                 soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
+                soilImg.setImageResource(R.drawable.soil_moisture);
             }
 
             if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
                 pHTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
+                phImg.setImageResource(R.drawable.ph_warning);
                 isThereWarning = true;
             } else {
                 pHTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
+                phImg.setImageResource(R.drawable.ph);
             }
 
             if (isThereWarning) {
