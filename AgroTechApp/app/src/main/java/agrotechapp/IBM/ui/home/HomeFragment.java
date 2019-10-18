@@ -243,6 +243,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 //            }
         }else if(olddatanumbers != newNumbers){
             olddatanumbers = newNumbers;
+            emailIsSent = false;
             if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
                 sendEmail = true;
             }
