@@ -1,11 +1,10 @@
 package agrotechapp.IBM.Logic;
 
-import android.util.Log;
 
+import android.util.Log;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -21,21 +20,15 @@ public class GMail {
     final String starttls = "true";
     final String emailHost = "smtp.gmail.com";
 
-
     String fromEmail;
     String fromPassword;
     List<String> toEmailList;
     String emailSubject;
     String emailBody;
-
     Properties emailProperties;
     Session mailSession;
     MimeMessage emailMessage;
 
-
-    public GMail() {
-
-    }
 
     public GMail(String fromEmail, String fromPassword,
                  List<String> toEmailList, String emailSubject, String emailBody) {
@@ -57,23 +50,19 @@ public class GMail {
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
-
         emailMessage.setFrom(new InternetAddress(fromEmail, fromEmail));
         for (String toEmail : toEmailList) {
             Log.i("GMail", "toEmail: " + toEmail);
             emailMessage.addRecipient(Message.RecipientType.TO,
                     new InternetAddress(toEmail));
         }
-
         emailMessage.setSubject(emailSubject);
         emailMessage.setContent(emailBody, "text/html");// for a html email
-        // emailMessage.setText(emailBody);// for a text email
         Log.i("GMail", "Email Message created.");
         return emailMessage;
     }
 
     public void sendEmail() throws AddressException, MessagingException {
-
         Transport transport = mailSession.getTransport("smtp");
         transport.connect(emailHost, fromEmail, fromPassword);
         Log.i("GMail", "allrecipients: " + emailMessage.getAllRecipients());

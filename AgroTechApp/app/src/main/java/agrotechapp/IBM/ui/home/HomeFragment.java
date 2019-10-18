@@ -1,19 +1,15 @@
 package agrotechapp.IBM.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -21,15 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import agrotechapp.IBM.Logic.User;
-import agrotechapp.IBM.MainActivity;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
 
@@ -44,13 +35,10 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     private boolean isThereWarning = false;
     private static int fieldNumber=1;
     private static boolean viewDetailsButtonPress = false;
-    private static int counter =0;
-    private ImageView tempImage, phImage, soilImage;
+//    private ImageView tempImage, phImage, soilImage;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-//        instance = new HomeFragment();
-//        Log.d("myTag","instance?: "+instance);
         viewDetailsButtonPress = false;
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -64,9 +52,10 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         fieldNumTextView = (TextView)root.findViewById(R.id.fieldNumTextView);
         fieldNumTextView.setText("FIELD 1");
         listview = new listView();
-        tempImage = (ImageView) root.findViewById(R.id.tempImageView);
-        phImage = (ImageView) root.findViewById(R.id.phImageView);
-        soilImage = (ImageView) root.findViewById(R.id.soilMoistureImageView);
+
+//        tempImage = (ImageView) root.findViewById(R.id.tempImageView);
+//        phImage = (ImageView) root.findViewById(R.id.phImageView);
+//        soilImage = (ImageView) root.findViewById(R.id.soilMoistureImageView);
 
         updateDashboard();
 
@@ -75,11 +64,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             fieldOne.setOnTouchListener ((View.OnTouchListener) this);
         }
 
-//        final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-//                textView.setText(s);
             }
         });
 
@@ -89,24 +76,11 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             public void onClick(View v) {
                 Intent bla = new Intent(getContext(),listView.class);
                 startActivity(bla);
-                Log.d("myTag","counter: "+counter);
-                Log.d("myTag","bool: "+listview.getsendEmail());
-
-                if(counter==0 && listview.getsendEmail() || listview.getsendEmail()){
-                    viewDetailsButtonPress = true;
-                    counter++;
-                }
             }
         });
         return root;
     }
 
-    public boolean getViewDetailsButtonPress(){
-        return viewDetailsButtonPress;
-    }
-    public void setviewDetailsButtonPress(boolean viewDetailsButtonPress){
-        this.viewDetailsButtonPress = viewDetailsButtonPress;
-    }
     public boolean onTouch (View v, MotionEvent ev) {
         boolean handledHere = false;
         final int action = ev.getAction();
@@ -124,7 +98,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         switch (action) {
 
             case MotionEvent.ACTION_DOWN :
-//                Log.d("myTag","ActionUp");
                 // On the UP, we do the click action.
                 // The hidden image (image_areas) has three different hotspots on it.
                 // The colors are red, blue, and yellow.
@@ -154,14 +127,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                     fieldNumber =1;
                     listview.parseSensorData(listview.getSensorData());
                     updateDashboard();
-//                    Log.d("myTag","FieldOne Clicked");
                 }
 
-                // If the next image is the same as the last image, go back to the default.
-                // toast ("Current image: " + currentResource + " next: " + nextImage);
-//                if (currentResource == nextImage) {
-//                    nextImage = R.drawable.fieldone;
-//                }
                 handledHere = true;
                 break;
 
@@ -170,7 +137,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         } // end switch
 
         if (handledHere) {
-
             if (nextImage > 0) {
                 fieldone.setImageResource (nextImage);
                 fieldone.setTag (nextImage);
@@ -223,62 +189,33 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             timeTextView.setText(String.valueOf(hour) + ":" + String.valueOf(minutes));
         }
     }
-    public void setCounter(int counter){
-        this.counter = counter;
-    }
 
     public void updateDashboard() {
-//        Log.d("myTag", "listView Object: " + listview);
-//        Log.d("myTag", "k: " + user.getSensorsData());
-        int number = listview.getNumOfSensors(listview.getSensorData());
         user = User.getInstance();
         listview.parseSensorData(user.getSensorsData());
 
-        Log.d("myTag", "Checking updates: "+number +" = "+listview.getNumOfSensors(user.getSensorsData())+" ??");
-        if(number == listview.getNumOfSensors(user.getSensorsData())){
-            Log.d("myTag","no email to sent");
-            setviewDetailsButtonPress(false);
-        }else {
-            setviewDetailsButtonPress(true);
-            Log.d("myTag","email to sent");
-            counter = 0;
-        }
 
-//        Log.d("myTag", "User Object: " + user);
-//        Log.d("myTag", "User: " + user.getTempMax());
-        Log.d("myTag", ":::" + R.drawable.temperature);
         if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
-//            if(tempImage.getResources() == Re)
-//                tempImage.setImageResource(R.drawable.temperature_warning);
             isThereWarning = true;
         } else {
-//            tempImage.setImageResource(R.drawable.temperature);
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
         }
-
-
 
             if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin()) {
                 soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 isThereWarning = true;
-//                soilImage.setImageDrawable(root.getResources().getDrawable(R.drawable.soil_moisture_warning));
             } else {
                 soilMoistureTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
-//                soilImage.setImageDrawable(root.getResources().getDrawable(R.drawable.soil_moisture));
             }
 
             if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
                 pHTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 isThereWarning = true;
-//                phImage.setImageDrawable(root.getResources().getDrawable(R.drawable.ph_warning));
             } else {
                 pHTextView.setTextColor(root.getResources().getColor(R.color.colorPrimaryDark));
-//                phImage.setImageResource(R.drawable.ph);
             }
 
-
-//            Log.d("myTag", "sub: " + fieldNumTextView.getText().length());
             if (isThereWarning) {
                 fieldNumTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
                 if (fieldNumTextView.getText().length() < 8)
@@ -288,7 +225,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 fieldNumTextView.setText(fieldNumTextView.getText().subSequence(0,7));
             }
 
-//        Log.d("myTag","listview.getLastTemp(): "+listview.getLastTemp());
         Double temp = Double.valueOf(listview.getLastTemp());
         tempTextView.setText(String.format( "%.2f",temp));
         soilMoistureTextView.setText(listview.getLastSoil());

@@ -1,52 +1,34 @@
 package agrotechapp.IBM.ui.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.TestLooperManager;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.view.Window;
-
-
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
-import com.anychart.charts.Cartesian3d;
-import com.anychart.charts.Pie;
-import com.anychart.core.cartesian.series.Area3d;
 import com.anychart.core.cartesian.series.Line;
 import com.anychart.data.Mapping;
 import com.anychart.data.Set;
 import com.anychart.enums.Anchor;
-import com.anychart.enums.HoverMode;
 import com.anychart.enums.MarkerType;
-import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 import com.anychart.graphics.vector.Stroke;
-import com.anychart.graphics.vector.hatchfill.HatchFillType;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import agrotechapp.IBM.Dashboard;
-import agrotechapp.IBM.Logic.SendMailTask;
 import agrotechapp.IBM.Logic.SensorData;
 import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
@@ -59,9 +41,6 @@ public class listView extends AppCompatActivity {
     TextView backTextView;
     TextView fieldNumberTextView;
     TextView cropTypeTextView;
-    TextView tempReadingTextView;
-    TextView pHReadingTextView;
-    TextView soilReadingTextView;
     String[] IDs ;
     String[] temps;
     String[] pHs;
@@ -71,8 +50,6 @@ public class listView extends AppCompatActivity {
     int numberOfSelectedField=0;
     private Date dateTimes;
     private String[] time;
-    int numberOfSensorData=0;
-//    HomeFragment homeFragment = HomeFragment.getInstance();
     HomeFragment homeFragment = new HomeFragment();
 
     String fromEmail = "agrotech.customers@gmail.com";
@@ -106,9 +83,6 @@ public class listView extends AppCompatActivity {
 
         drawGraph();
 
-
-
-//        Log.d("myTag","nbof Selected: "+numberOfSelectedField);
         ItemAdapter itemAdapter = new ItemAdapter(this,IDs,temps,pHs,soil,dates,numberOfSelectedField);
         myListView.setAdapter(itemAdapter);
 
@@ -134,42 +108,28 @@ public class listView extends AppCompatActivity {
                 startActivity(goBackIntent);
             }
         });
-        Log.d("myTag","Entires: "+temps[0]+" - "+soil[0]+" - "+pHs[0]);
         if(Double.valueOf(temps[0]) > user.getTempMax() || Double.valueOf(temps[0]) < user.getTempMin()){
                 sendEmail = true;
-//                new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
 
         if(Double.valueOf(soil[0]) > user.getSoilMax() || Double.valueOf(soil[0]) < user.getSoilMin()){
             sendEmail = true;
-            Log.d("myTag", "tb a true ahy");
-//          new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
 
         if(Double.valueOf(pHs[0]) > user.getpHMax() || Double.valueOf(pHs[0]) < user.getpHMin()){
             sendEmail = true;
-//          new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }
-        Log.d("myTag","old nb: "+nbOfList+" new: "+getNumOfSensors(user.getSensorsData()));
-        Log.d("myTag","pressed on view details? "+homeFragment.getViewDetailsButtonPress());
-        if(     (sendEmail && nbOfList!=getNumOfSensors(user.getSensorsData()))     ||
-                (homeFragment.getViewDetailsButtonPress()  && sendEmail)){
+        if(sendEmail){
             emailIsSent = true;
-            Log.d("myTag","Email Sent!!!");
+            Log.d("myTag","EMAIL SENT!!");
             sendEmail = false;
-            nbOfList = getNumOfSensors(user.getSensorsData());
 //            new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
         }else {
-
-            Log.d("myTag","NOOOO Email Sent!!!");
+            Log.d("myTag","NOOOOOO Email Sent!!!");
         }
 
     }
-
-    public boolean getsendEmail(){
-        Log.d("myTag",":::"+emailIsSent);
-        return emailIsSent;
-    }
+    
     private class CustomDataEntry extends ValueDataEntry {
 
         CustomDataEntry(String x, Number value, Number value2, Number value3) {
@@ -195,7 +155,6 @@ public class listView extends AppCompatActivity {
     public void parseSensorData(ArrayList<ArrayList<SensorData>> sensorsData){
         int num = 0;
         numberOfSelectedField=0;
-//        Log.d("myTag","I selected: "+homeFragment.getFieldNumber());
         for(ArrayList<SensorData> s : sensorsData) {
             for (SensorData entry : s) {
                 if (entry.getDeviceID() == homeFragment.getFieldNumber()) {
@@ -203,7 +162,6 @@ public class listView extends AppCompatActivity {
                 }
             }
         }
-//        Log.d("myTag","nb: "+numberOfSelectedField);
         IDs = new String[numberOfSelectedField];
         temps = new String[numberOfSelectedField];
         pHs = new String[numberOfSelectedField];
@@ -242,7 +200,6 @@ public class listView extends AppCompatActivity {
         }
         for(int i=0; i<numberOfSelectedField-1; i++) {
             for (int j = 0; j < numberOfSelectedField - i - 1; j++) {
-//                Log.d("myTag", "R: " + compare(dates[i], dates[i + 1]));
                 if (compare(dates[j], dates[j + 1]) < 0) {
                     tempString = temps[j];
                     temps[j] = temps[j+1];
@@ -263,9 +220,7 @@ public class listView extends AppCompatActivity {
                 }
             }
         }
-//        Log.d("myTag","last temp: "+temps[0]);
         user = User.getInstance();
-//        Log.d("myTag","nb: "+getNumOfSensors(user.getSensorsData()));
     }
 
     public int compare(String arg0, String arg1) {

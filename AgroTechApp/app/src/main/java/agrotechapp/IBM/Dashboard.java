@@ -1,43 +1,27 @@
 package agrotechapp.IBM;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
+
 import android.os.Bundle;
-
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.google.android.material.navigation.NavigationView;
-
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import agrotechapp.IBM.Logic.User;
-import agrotechapp.IBM.ui.home.ColorTool;
-//import agrotechapp.IBM.ui.ListView.listView;
 
 public class Dashboard extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     User user = User.getInstance();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,8 +45,6 @@ public class Dashboard extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -76,9 +58,6 @@ public class Dashboard extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-
-
 }
 
 

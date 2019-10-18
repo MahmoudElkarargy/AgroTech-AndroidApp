@@ -7,12 +7,9 @@ import com.ibm.wiotp.sdk.device.config.DeviceConfig;
 import com.ibm.wiotp.sdk.device.config.DeviceConfigAuth;
 import com.ibm.wiotp.sdk.device.config.DeviceConfigIdentity;
 import com.ibm.wiotp.sdk.device.config.DeviceConfigOptions;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,7 +21,6 @@ public class RobotCommand {
 
     private static String urlComm = "https://nodered-ibmdigitalnationcompetition.eu-gb.mybluemix.net/robotCommands";
     DeviceClient deviceClient2;
-
 
     public static String sendCommand(String mode, String dir, String speed) throws JSONException {
         // Set up JSON Object to send as parameter
@@ -60,7 +56,6 @@ public class RobotCommand {
         DeviceConfigIdentity identity = new DeviceConfigIdentity("bo5aph","typedevice","pidevice");
         DeviceConfigAuth auth = new DeviceConfigAuth("123456789");
         DeviceConfigOptions options = new DeviceConfigOptions();
-//        options.mqtt.keepAlive = 3;
         options.mqtt.sessionExpiry = 0;
         options.mqtt.cleanStart = true;
         DeviceConfig config = new DeviceConfig(identity, auth,options);

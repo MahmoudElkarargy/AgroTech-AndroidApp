@@ -1,18 +1,11 @@
 package agrotechapp.IBM.ui.ListView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.Arrays;
-import java.util.List;
-
-import agrotechapp.IBM.Logic.SendMailTask;
 import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.home.HomeFragment;
@@ -66,8 +59,6 @@ public class ItemAdapter extends BaseAdapter{
             String pH = pHs[i];
             String soil = soils[i];
             String date = dates[i];
-//            Log.d("myTag",temp);
-//            Log.d("myTag", "FieldNumber: " + homeFragment.getFieldNumber() + " id: " + Integer.valueOf(id));
 
             if (homeFragment.getFieldNumber() == Integer.valueOf(id)) {
                 TextView idTextView = (TextView) v.findViewById(R.id.IDsList);
@@ -113,7 +104,6 @@ public class ItemAdapter extends BaseAdapter{
                 }
 
                 dateTextView.setTextColor(v.getResources().getColor(R.color.colorPrimaryDark));
-
                 idTextView.setText(id);
                 pHTextView.setText(pH);
                 tempTextView.setText(temp);

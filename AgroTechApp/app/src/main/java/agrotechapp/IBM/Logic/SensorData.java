@@ -19,19 +19,15 @@ public class SensorData {
 	public int getDeviceID() {
 		return deviceID;
 	}
-
 	public double getTemperature() {
 		return temperature;
 	}
-
 	public double getpH() {
 		return pH;
 	}
-
 	public double getSoilMoisture() {
 		return soilMoisture;
 	}
-
 	public String getTime() {
 		return time;
 	}

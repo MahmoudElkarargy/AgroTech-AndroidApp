@@ -1,7 +1,6 @@
 package agrotechapp.IBM;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class SignUp extends AppCompatActivity {

@@ -3,15 +3,11 @@ package agrotechapp.IBM.Logic;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
-
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,6 +26,7 @@ public class User {
 	private String email;
 	private String password;
 	private ArrayList< ArrayList<SensorData>> sensorsData;
+
 	//sensors thresholds
 	private double tempMax;
 	private double tempMin;
@@ -53,51 +50,29 @@ public class User {
 		this.soilMin = soilMin;
 	}
 
-
-
 	public String getFirstName() {
 		return firstName;
 	}
-
-
-
 	public String getLastName() {
 		return lastName;
 	}
-
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
-
 	public String getPassword() {
 		return password;
 	}
-
-
-
 	public ArrayList<ArrayList<SensorData>> getSensorsData() {
 		return sensorsData;
 	}
-
 	public double getTempMax() { return tempMax; }
-
 	public double getTempMin() { return tempMin; }
-
 	public double getpHMax() { return pHMax; }
-
 	public double getpHMin() { return pHMin; }
-
 	public double getSoilMax() { return soilMax; }
-
 	public double getSoilMin() { return soilMin; }
-	
-	
+
 	public static class Server {
-		
 		private static String urlAuth = "https://nodered-ibmdigitalnationcompetition.eu-gb.mybluemix.net/auth";
 		
 		@RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -106,7 +81,6 @@ public class User {
 			JSONObject data = new JSONObject();
 			data.put("email", email);
 			data.put("password", password);
-
 
 			//Set up Post Request
 			OkHttpClient client = new OkHttpClient();
