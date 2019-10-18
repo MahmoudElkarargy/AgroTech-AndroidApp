@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     private String emailBody = "WARNING! check your field readings!";
     private boolean sendEmail = false;
     private static boolean emailIsSent = false;
-
+    private boolean dontSentAgianEvenIfnewDataEntered =true;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -217,7 +217,32 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
         //Email checking..
         newNumbers = listview.getNumOfSensors(user.getSensorsData());
-        if(!emailIsSent) {
+        if(dontSentAgianEvenIfnewDataEntered) {
+            if (!emailIsSent) {
+                if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
+                    sendEmail = true;
+                }
+
+                if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin()) {
+                    sendEmail = true;
+                }
+
+                if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
+                    sendEmail = true;
+                }
+                if (sendEmail) {
+                    emailIsSent = true;
+                    sendEmail = false;
+                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+                    dontSentAgianEvenIfnewDataEntered = false;
+                }
+            }
+//            else if (olddatanumbers != newNumbers) {
+//                olddatanumbers = newNumbers;
+//                emailIsSent = false;
+//            }
+        }else if(olddatanumbers != newNumbers){
+            olddatanumbers = newNumbers;
             if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
                 sendEmail = true;
             }
@@ -229,16 +254,11 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
                 sendEmail = true;
             }
-            if (sendEmail) {
-                emailIsSent = true;
-                sendEmail = false;
-                new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-              }
+            if(!sendEmail)
+                dontSentAgianEvenIfnewDataEntered = true;
         }
-        else if(olddatanumbers != newNumbers){
-            olddatanumbers = newNumbers;
-            emailIsSent = false;
-        }
+
+
 
         if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
