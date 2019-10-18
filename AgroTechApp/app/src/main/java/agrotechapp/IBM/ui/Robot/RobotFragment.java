@@ -42,9 +42,9 @@ import org.json.JSONException;
 
 public class RobotFragment extends Fragment {
 
-    boolean isManualMode = false;
-    TextView commandTextView;
-    String command;
+    private boolean isManualMode = false;
+    private TextView commandTextView;
+    private String command;
     private RobotViewModel galleryViewModel;
     RobotCommand robot = new RobotCommand();
 

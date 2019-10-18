@@ -12,15 +12,15 @@ import agrotechapp.IBM.ui.home.HomeFragment;
 
 
 public class ItemAdapter extends BaseAdapter{
-    String[] IDs;
-    String[] temps;
-    String[] pHs;
-    String[] soils;
-    String[] dates;
-    int numberOfSensorData;
-    LayoutInflater mInflator;
-    User user;
-    HomeFragment homeFragment;
+    private String[] IDs;
+    private String[] temps;
+    private String[] pHs;
+    private String[] soils;
+    private String[] dates;
+    private int numberOfSensorData;
+    private LayoutInflater mInflator;
+    private User user;
+    private HomeFragment homeFragment;
 
 
     public ItemAdapter(Context c, String[] ids, String[] temps,String[] pH,String[] soil, String[] date, int numberOfSensorData){

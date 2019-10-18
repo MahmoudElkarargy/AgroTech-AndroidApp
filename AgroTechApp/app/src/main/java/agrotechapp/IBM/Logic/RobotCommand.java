@@ -20,7 +20,7 @@ public class RobotCommand {
 
 
     private static String urlComm = "https://nodered-ibmdigitalnationcompetition.eu-gb.mybluemix.net/robotCommands";
-    DeviceClient deviceClient2;
+    private DeviceClient deviceClient2;
 
     public static String sendCommand(String mode, String dir, String speed) throws JSONException {
         // Set up JSON Object to send as parameter

@@ -33,37 +33,30 @@ import agrotechapp.IBM.ui.ListView.listView;
 public class HomeFragment extends Fragment implements View.OnTouchListener{
 
     static private HomeViewModel homeViewModel;
-    static View root;
-    static TextView tempTextView, pHTextView, soilMoistureTextView;
-    static listView listview;
-    static User user = User.getInstance();
-    static TextView fieldNumTextView;
+    static private View root;
+    static private TextView tempTextView, pHTextView, soilMoistureTextView;
+    static private listView listview;
+    static private User user = User.getInstance();
+    static private TextView fieldNumTextView;
     private boolean isThereWarning = false;
     private static int fieldNumber=1;
-    static int olddatanumbers, newNumbers;
-    static Activity activity;
-//    private ImageView tempImage, phImage, soilImage;
+    static private int olddatanumbers, newNumbers;
+    static private Activity activity;
 
+    private String fromEmail = "agrotech.customers@gmail.com";
+    private String fromPassword = "AgroTech2019";
 
-    String fromEmail = "agrotech.customers@gmail.com";
-    String fromPassword = "AgroTech2019";
-
-    String toEmail = user.getEmail();
-    List<String> toEmailList = Arrays.asList(toEmail
+    private String toEmail = user.getEmail();
+    private List<String> toEmailList = Arrays.asList(toEmail
             .split("\\s*,\\s*"));
-    String emailSubject = "AgroTech";
-    String emailBody = "WARNING! check your field readings!";
-    LayoutInflater inflater;
-    ViewGroup container;
-    Bundle savedInstanceState;
-    boolean sendEmail = false;
-    static boolean emailIsSent = false;
+    private String emailSubject = "AgroTech";
+    private String emailBody = "WARNING! check your field readings!";
+    private boolean sendEmail = false;
+    private static boolean emailIsSent = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        this.inflater = inflater;
-        this.container = container;
-        this.savedInstanceState = savedInstanceState;
+
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -76,12 +69,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         fieldNumTextView.setText("FIELD 1");
         listview = new listView();
 
-//        tempImage = (ImageView) root.findViewById(R.id.tempImageView);
-//        phImage = (ImageView) root.findViewById(R.id.phImageView);
-//        soilImage = (ImageView) root.findViewById(R.id.soilMoistureImageView);
-
         olddatanumbers = listview.getNumOfSensors(user.getSensorsData());
-        Log.d("myTag","number of data: "+olddatanumbers);
+//        Log.d("myTag","number of data: "+olddatanumbers);
         updateDashboard();
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
@@ -219,10 +208,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     public void updateDashboard() {
         user = User.getInstance();
         listview.parseSensorData(user.getSensorsData());
-
-
-
-
 
 
         //Email checking..

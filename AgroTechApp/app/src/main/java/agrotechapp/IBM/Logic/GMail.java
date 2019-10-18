@@ -20,14 +20,14 @@ public class GMail {
     final String starttls = "true";
     final String emailHost = "smtp.gmail.com";
 
-    String fromEmail;
-    String fromPassword;
-    List<String> toEmailList;
-    String emailSubject;
-    String emailBody;
-    Properties emailProperties;
-    Session mailSession;
-    MimeMessage emailMessage;
+    private String fromEmail;
+    private String fromPassword;
+    private List<String> toEmailList;
+    private String emailSubject;
+    private String emailBody;
+    private Properties emailProperties;
+    private Session mailSession;
+    private MimeMessage emailMessage;
 
 
     public GMail(String fromEmail, String fromPassword,
@@ -70,5 +70,4 @@ public class GMail {
         transport.close();
         Log.i("GMail", "Email sent successfully.");
     }
-
 }

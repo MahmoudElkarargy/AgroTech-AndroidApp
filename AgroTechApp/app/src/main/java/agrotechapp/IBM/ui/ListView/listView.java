@@ -36,24 +36,24 @@ import agrotechapp.IBM.ui.home.HomeFragment;
 
 public class listView extends AppCompatActivity {
 
-    ListView myListView;
-    ImageView backImageView;
-    TextView backTextView;
-    TextView fieldNumberTextView;
-    TextView cropTypeTextView;
-    String[] IDs ;
-    String[] temps;
-    String[] pHs;
-    String[] soil;
-    String[] dates;
-    String tempString;
-    int numberOfSelectedField=0;
+    private ListView myListView;
+    private ImageView backImageView;
+    private TextView backTextView;
+    private TextView fieldNumberTextView;
+    private TextView cropTypeTextView;
+    private String[] IDs ;
+    private String[] temps;
+    private String[] pHs;
+    private String[] soil;
+    private String[] dates;
+    private String tempString;
+    private int numberOfSelectedField=0;
     private Date dateTimes;
     private String[] time;
-    HomeFragment homeFragment = new HomeFragment();
+    private HomeFragment homeFragment = new HomeFragment();
 
-    User user = User.getInstance();
-    static ArrayList< ArrayList<SensorData>> sensorsData;
+    private User user = User.getInstance();
+    private static ArrayList< ArrayList<SensorData>> sensorsData;
     public listView(){
         sensorsData = new ArrayList<ArrayList<SensorData>>();
         sensorsData = user.getSensorsData();
@@ -195,7 +195,7 @@ public class listView extends AppCompatActivity {
         user = User.getInstance();
     }
 
-    public int compare(String arg0, String arg1) {
+    private int compare(String arg0, String arg1) {
         SimpleDateFormat format = new SimpleDateFormat(
                 "yyyy-MM-dd HH:mm:ss");
         int compareResult = 0;
