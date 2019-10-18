@@ -129,7 +129,7 @@ public class listView extends AppCompatActivity {
         }
 
     }
-    
+
     private class CustomDataEntry extends ValueDataEntry {
 
         CustomDataEntry(String x, Number value, Number value2, Number value3) {
@@ -178,19 +178,19 @@ public class listView extends AppCompatActivity {
                         temps[num] = "0" + Double.toString(entry.getTemperature());
                     }
                     else{
-                        temps[num] = Double.toString(entry.getTemperature());
+                        temps[num] = Double.toString(Math.round(10*entry.getTemperature())*.1000 );
                     }
                     if (entry.getpH() < 10) {
                         pHs[num] = "0" + Double.toString(entry.getpH());
                     }
                     else{
-                        pHs[num] = Double.toString(entry.getpH());
+                        pHs[num] = Double.toString(Math.round(10*entry.getpH()) * .1000);
                     }
                     if (entry.getSoilMoisture() < 10) {
                         soil[num] = "0" + Double.toString(entry.getSoilMoisture());
                     }
                     else{
-                        soil[num] = Double.toString(entry.getSoilMoisture());
+                        soil[num] = Double.toString(Math.round(10*entry.getSoilMoisture()) *.1000);
                     }
                     dates[num] = entry.getTime();
                     num++;
