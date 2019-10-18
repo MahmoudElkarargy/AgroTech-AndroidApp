@@ -1,9 +1,11 @@
 package agrotechapp.IBM.ui.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,34 +19,55 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
+import agrotechapp.IBM.Logic.SendMailTask;
 import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
 
 public class HomeFragment extends Fragment implements View.OnTouchListener{
 
-    private HomeViewModel homeViewModel;
+    static private HomeViewModel homeViewModel;
     static View root;
     static TextView tempTextView, pHTextView, soilMoistureTextView;
     static listView listview;
-    static User user;
+    static User user = User.getInstance();
     static TextView fieldNumTextView;
     private boolean isThereWarning = false;
     private static int fieldNumber=1;
-    private static boolean viewDetailsButtonPress = false;
+    static int olddatanumbers, newNumbers;
+    static Activity activity;
 //    private ImageView tempImage, phImage, soilImage;
+
+
+    String fromEmail = "agrotech.customers@gmail.com";
+    String fromPassword = "AgroTech2019";
+
+    String toEmail = user.getEmail();
+    List<String> toEmailList = Arrays.asList(toEmail
+            .split("\\s*,\\s*"));
+    String emailSubject = "AgroTech";
+    String emailBody = "WARNING! check your field readings!";
+    LayoutInflater inflater;
+    ViewGroup container;
+    Bundle savedInstanceState;
+    boolean sendEmail = false;
+    static boolean emailIsSent = false;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        viewDetailsButtonPress = false;
+        this.inflater = inflater;
+        this.container = container;
+        this.savedInstanceState = savedInstanceState;
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
-         user = User.getInstance();
-
+        activity = this.getActivity();
         updateTime();
         tempTextView = (TextView) root.findViewById(R.id.tempTextView);
         soilMoistureTextView = (TextView) root.findViewById(R.id.soilMoistureTextView);
@@ -57,6 +80,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 //        phImage = (ImageView) root.findViewById(R.id.phImageView);
 //        soilImage = (ImageView) root.findViewById(R.id.soilMoistureImageView);
 
+        olddatanumbers = listview.getNumOfSensors(user.getSensorsData());
+        Log.d("myTag","number of data: "+olddatanumbers);
         updateDashboard();
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
@@ -78,6 +103,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 startActivity(bla);
             }
         });
+
         return root;
     }
 
@@ -195,6 +221,53 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         listview.parseSensorData(user.getSensorsData());
 
 
+
+
+
+
+        //Email checking..
+        newNumbers = listview.getNumOfSensors(user.getSensorsData());
+//        Log.d("myTag", "Now nb is: "+newNumbers);
+        if(activity==null) {
+//            Log.d("myTag", "WHYYYYYY????");
+        }
+        if(!emailIsSent) {
+            if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
+                sendEmail = true;
+            }
+
+            if (Double.valueOf(listview.getLastSoil()) > user.getSoilMax() || Double.valueOf(listview.getLastSoil()) < user.getSoilMin()) {
+                sendEmail = true;
+            }
+
+            if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
+                sendEmail = true;
+            }
+            if (sendEmail) {
+                emailIsSent = true;
+//                Log.d("myTag", "EMAIL SENT!!");
+                sendEmail = false;
+//                if(activity==null) {
+////                    Activity activity = getActivity();
+//                    Log.d("myTag", "NULLLLLLLLLLLL");
+////                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+////                    Log.d("myTag", "it was null");
+//                }else {
+//                    Log.d("myTag", "EMAIL SENT!!2222");
+                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+//                    Log.d("myTag", "Excuted");
+//                }
+            }
+        }
+        else if(olddatanumbers != newNumbers){
+//            Log.d("myTag", "added new entiry");
+            olddatanumbers = newNumbers;
+            emailIsSent = false;
+        }
+//        else {
+//            Log.d("myTag", "NOOOOOO Email Sent!!!");
+//        }
+
         if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
             tempTextView.setTextColor(root.getResources().getColor(R.color.colorRed));
             isThereWarning = true;
@@ -225,8 +298,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 fieldNumTextView.setText(fieldNumTextView.getText().subSequence(0,7));
             }
 
-        Double temp = Double.valueOf(listview.getLastTemp());
-        tempTextView.setText(String.format( "%.2f",temp));
+        tempTextView.setText(listview.getLastTemp());
         soilMoistureTextView.setText(listview.getLastSoil());
         pHTextView.setText(listview.getLastpH());
     }

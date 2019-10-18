@@ -52,16 +52,7 @@ public class listView extends AppCompatActivity {
     private String[] time;
     HomeFragment homeFragment = new HomeFragment();
 
-    String fromEmail = "agrotech.customers@gmail.com";
-    String fromPassword = "AgroTech2019";
     User user = User.getInstance();
-    String toEmail = user.getEmail();
-    List<String> toEmailList = Arrays.asList(toEmail
-            .split("\\s*,\\s*"));
-    String emailSubject = "AgroTech";
-    String emailBody = "WARNING! check your field readings!";
-    boolean sendEmail = false;
-    static boolean emailIsSent = false;
     static ArrayList< ArrayList<SensorData>> sensorsData;
     public listView(){
         sensorsData = new ArrayList<ArrayList<SensorData>>();
@@ -108,25 +99,6 @@ public class listView extends AppCompatActivity {
                 startActivity(goBackIntent);
             }
         });
-        if(Double.valueOf(temps[0]) > user.getTempMax() || Double.valueOf(temps[0]) < user.getTempMin()){
-                sendEmail = true;
-        }
-
-        if(Double.valueOf(soil[0]) > user.getSoilMax() || Double.valueOf(soil[0]) < user.getSoilMin()){
-            sendEmail = true;
-        }
-
-        if(Double.valueOf(pHs[0]) > user.getpHMax() || Double.valueOf(pHs[0]) < user.getpHMin()){
-            sendEmail = true;
-        }
-        if(sendEmail){
-            emailIsSent = true;
-            Log.d("myTag","EMAIL SENT!!");
-            sendEmail = false;
-//            new SendMailTask(listView.this).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-        }else {
-            Log.d("myTag","NOOOOOO Email Sent!!!");
-        }
 
     }
 
