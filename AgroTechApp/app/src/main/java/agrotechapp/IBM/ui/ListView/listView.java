@@ -98,6 +98,15 @@ public class listView extends AppCompatActivity {
                 startActivity(goBackIntent);
             }
         });
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeFragment.setFieldNumber(1);
+                parseSensorData(sensorsData);
+                Intent goBackIntent = new Intent(getApplicationContext(), Dashboard.class);
+                startActivity(goBackIntent);
+            }
+        });
 
     }
 
@@ -241,7 +250,6 @@ public class listView extends AppCompatActivity {
         }
 
         for(int i = 0; i<pHs.length;i++){
-//            System.out.println(time[i]);
             seriesData.add(new CustomDataEntry(time[i], Float.parseFloat(temps[i]), Float.parseFloat(pHs[i]), Float.parseFloat(soil[i])));
         }
 

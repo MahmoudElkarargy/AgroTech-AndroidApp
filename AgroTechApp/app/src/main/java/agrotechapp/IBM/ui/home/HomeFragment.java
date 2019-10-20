@@ -31,8 +31,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import agrotechapp.IBM.Dashboard;
 import agrotechapp.IBM.Logic.SendMailTask;
 import agrotechapp.IBM.Logic.User;
+import agrotechapp.IBM.MainActivity;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
 
@@ -64,8 +66,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     private String emailSubject = "AgroTech";
     private String emailBody = "WARNING! check your field readings!";
     private boolean sendEmail = false;
-    private static boolean emailIsSent = false;
-    private boolean dontSentAgianEvenIfnewDataEntered =true;
+    private static boolean dontSentAgianEvenIfnewDataEntered =true;
     private static NotificationCompat.Builder notification;
     private static final int uniqueID = 121998;
     private static Uri soundUri;
@@ -148,7 +149,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 // varying pixel density.
                 ColorTool ct = new ColorTool ();
                 int tolerance = 25;
-//                nextImage = R.drawable.fieldone;
                 if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {
                     nextImage = R.drawable.fieldtwo;
                     fieldNumTextView.setText("FIELD 2");
@@ -237,7 +237,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         //Email checking..
         newNumbers = listview.getNumOfSensors(user.getSensorsData());
         if(dontSentAgianEvenIfnewDataEntered) {
-            if (!emailIsSent) {
                 if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
                     sendEmail = true;
                 }
@@ -250,20 +249,14 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                     sendEmail = true;
                 }
                 if (sendEmail) {
-                    emailIsSent = true;
                     sendEmail = false;
-//                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
                     sendNotification();
                     dontSentAgianEvenIfnewDataEntered = false;
                 }
-            }
-//            else if (olddatanumbers != newNumbers) {
-//                olddatanumbers = newNumbers;
-//                emailIsSent = false;
-//            }
-        }else if(olddatanumbers != newNumbers){
+        }
+        if(olddatanumbers != newNumbers){
             olddatanumbers = newNumbers;
-            emailIsSent = false;
             if (Double.valueOf(listview.getLastTemp()) > user.getTempMax() || Double.valueOf(listview.getLastTemp()) < user.getTempMin()) {
                 sendEmail = true;
             }
@@ -275,8 +268,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
             if (Double.valueOf(listview.getLastpH()) > user.getpHMax() || Double.valueOf(listview.getLastpH()) < user.getpHMin()) {
                 sendEmail = true;
             }
-            if(!sendEmail)
+            if(!sendEmail) {
                 dontSentAgianEvenIfnewDataEntered = true;
+            }
         }
 
 
@@ -324,7 +318,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
 
     private void sendNotification(){
-        Log.d("myTag","Sending");
         notification.setSmallIcon(R.drawable.logo_black);
         notification.setTicker("AgroTech");
         notification.setWhen(System.currentTimeMillis());
@@ -333,8 +326,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         notification.setSound(soundUri);
         notification.setDefaults(Notification.DEFAULT_VIBRATE);
 
-        Intent intent = new Intent(activity,HomeFragment.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(activity, Dashboard.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, 0);
         notification.setContentIntent(pendingIntent);
 
         NotificationManager nm = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE);
