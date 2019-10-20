@@ -1,10 +1,16 @@
 package agrotechapp.IBM.ui.home;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -28,6 +35,8 @@ import agrotechapp.IBM.Logic.SendMailTask;
 import agrotechapp.IBM.Logic.User;
 import agrotechapp.IBM.R;
 import agrotechapp.IBM.ui.ListView.listView;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class HomeFragment extends Fragment implements View.OnTouchListener{
 
@@ -57,6 +66,10 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     private boolean sendEmail = false;
     private static boolean emailIsSent = false;
     private boolean dontSentAgianEvenIfnewDataEntered =true;
+    private static NotificationCompat.Builder notification;
+    private static final int uniqueID = 121998;
+    private static Uri soundUri;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -76,6 +89,11 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         soilImg = (ImageView) root.findViewById(R.id.soilMoistureImageView);
 
         olddatanumbers = listview.getNumOfSensors(user.getSensorsData());
+
+        notification = new NotificationCompat.Builder(activity);
+        notification.setAutoCancel(true);
+        soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         updateDashboard();
 
         ImageView fieldOne = (ImageView) root.findViewById (R.id.fieldOne);
@@ -215,6 +233,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         listview.parseSensorData(user.getSensorsData());
 
 
+
         //Email checking..
         newNumbers = listview.getNumOfSensors(user.getSensorsData());
         if(dontSentAgianEvenIfnewDataEntered) {
@@ -233,7 +252,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 if (sendEmail) {
                     emailIsSent = true;
                     sendEmail = false;
-                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+//                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+                    sendNotification();
                     dontSentAgianEvenIfnewDataEntered = false;
                 }
             }
@@ -300,5 +320,25 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         tempTextView.setText(listview.getLastTemp());
         soilMoistureTextView.setText(listview.getLastSoil());
         pHTextView.setText(listview.getLastpH());
+    }
+
+
+    private void sendNotification(){
+        Log.d("myTag","Sending");
+        notification.setSmallIcon(R.drawable.logo_black);
+        notification.setTicker("AgroTech");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("WARNING!");
+        notification.setContentText("Check your App, A field is out of range.");
+        notification.setSound(soundUri);
+        notification.setDefaults(Notification.DEFAULT_VIBRATE);
+
+        Intent intent = new Intent(activity,HomeFragment.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        NotificationManager nm = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(uniqueID, notification.build());
+
     }
 }

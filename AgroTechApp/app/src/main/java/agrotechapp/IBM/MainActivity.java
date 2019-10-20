@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         protected String doInBackground(String... strings) {
-            signInBtn.setBackgroundColor(res.getColor(R.color.colorDarkGrey));
+//            signInBtn.setBackgroundColor(res.getColor(R.color.colorDarkGrey));
             try {
                 authenticated = User.Server.authenticateUser(strings[0], strings[1]);
                 if(authenticated == "True"){
