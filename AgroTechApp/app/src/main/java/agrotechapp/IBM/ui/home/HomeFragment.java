@@ -2,6 +2,7 @@ package agrotechapp.IBM.ui.home;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -318,6 +319,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
 
     private void sendNotification(){
+        Log.d("myTag","Sending");
         notification.setSmallIcon(R.drawable.logo_black);
         notification.setTicker("AgroTech");
         notification.setWhen(System.currentTimeMillis());
@@ -326,8 +328,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
         notification.setSound(soundUri);
         notification.setDefaults(Notification.DEFAULT_VIBRATE);
 
-        Intent intent = new Intent(activity, Dashboard.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, 0);
+        Intent intent = new Intent(activity,HomeFragment.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
 
         NotificationManager nm = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE);

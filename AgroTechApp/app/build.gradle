@@ -53,6 +53,8 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
     implementation 'com.android.support:cardview-v7:26.0.0'
+    implementation "com.android.support:support-compat:28.0.0"
+
     //    implementation 'com.android.support:multidex:1.0.2'
     //    implementation ('com.github.javafaker:javafaker:0.14') { exclude module: 'org.yaml' }
     implementation 'org.yaml:snakeyaml:1.25'
