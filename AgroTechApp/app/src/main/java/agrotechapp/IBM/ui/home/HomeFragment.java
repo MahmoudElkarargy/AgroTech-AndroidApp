@@ -5,11 +5,13 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -53,6 +56,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     private static int fieldNumber=1;
     static private int olddatanumbers, newNumbers;
     static private Activity activity;
+    static private Context context;
+    static private View view;
 
     private static ImageView tempImg;
     private static ImageView phImg;
@@ -68,9 +73,14 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
     private String emailBody = "WARNING! check your field readings!";
     private boolean sendEmail = false;
     private static boolean dontSentAgianEvenIfnewDataEntered =true;
-    private static NotificationCompat.Builder notification;
-    private static final int uniqueID = 121998;
+
+//    private static NotificationCompat.Builder notification;
+//    private static final int uniqueID = 121998;
     private static Uri soundUri;
+
+    private static final String CHANNEL_ID = "personal_notification";
+    private static final int NOTIFICATION_ID = 001;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -79,6 +89,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
         activity = this.getActivity();
+        context = this.getContext();
+        view = this.getView();
         updateTime();
         tempTextView = (TextView) root.findViewById(R.id.tempTextView);
         soilMoistureTextView = (TextView) root.findViewById(R.id.soilMoistureTextView);
@@ -92,8 +104,8 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
         olddatanumbers = listview.getNumOfSensors(user.getSensorsData());
 
-        notification = new NotificationCompat.Builder(activity);
-        notification.setAutoCancel(true);
+//        notification = new NotificationCompat.Builder(activity);
+//        notification.setAutoCancel(true);
         soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         updateDashboard();
@@ -251,8 +263,10 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
                 }
                 if (sendEmail) {
                     sendEmail = false;
-                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
-                    sendNotification();
+//                    new SendMailTask(activity).execute(fromEmail, fromPassword, toEmailList, emailSubject, emailBody);
+//                    sendNotification();
+//                    displayNotification(view);
+                    createNotificationChannel();
                     dontSentAgianEvenIfnewDataEntered = false;
                 }
         }
@@ -319,21 +333,53 @@ public class HomeFragment extends Fragment implements View.OnTouchListener{
 
 
     private void sendNotification(){
-        Log.d("myTag","Sending");
-        notification.setSmallIcon(R.drawable.logo_black);
-        notification.setTicker("AgroTech");
-        notification.setWhen(System.currentTimeMillis());
-        notification.setContentTitle("WARNING!");
-        notification.setContentText("Check your App, A field is out of range.");
-        notification.setSound(soundUri);
-        notification.setDefaults(Notification.DEFAULT_VIBRATE);
+//        Log.d("myTag","Sending");
+//        notification.setSmallIcon(R.drawable.logo_black);
+//        notification.setTicker("AgroTech");
+//        notification.setWhen(System.currentTimeMillis());
+//        notification.setContentTitle("WARNING!");
+//        notification.setContentText("Check your App, A field is out of range.");
+//        notification.setSound(soundUri);
+//        notification.setDefaults(Notification.DEFAULT_VIBRATE);
+//
+//        Intent intent = new Intent(activity,HomeFragment.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        notification.setContentIntent(pendingIntent);
+//
+//        NotificationManager nm = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE);
+//        nm.notify(uniqueID, notification.build());
 
-        Intent intent = new Intent(activity,HomeFragment.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        notification.setContentIntent(pendingIntent);
 
-        NotificationManager nm = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE);
-        nm.notify(uniqueID, notification.build());
 
+    }
+
+    public void displayNotification(View view){
+        Log.d("myTag","context: "+getContext());
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.logo_black);
+        builder.setContentTitle("WARNING!");
+        builder.setContentText("Check your App, A field is out of range.");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setSound(soundUri);
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+        notificationManagerCompat.notify(NOTIFICATION_ID,builder.build());
+
+
+
+    }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            Log.d("myTag","pleaseeee");
+            CharSequence name = "WARNING!";
+            String description = "Check your App, A field is out of range.";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            notificationChannel.setDescription(description);
+
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
     }
 }
